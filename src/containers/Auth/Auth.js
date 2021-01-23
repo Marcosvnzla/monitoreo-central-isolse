@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import MainDisplay from '../../components/MainDisplay/MainDisplay';
+import React, { Component, Fragment } from 'react';
 import Input from '../../components/UI/Input/Input';
 
 class Auth extends Component {
@@ -10,10 +9,13 @@ class Auth extends Component {
         <Input elementType="input" label="password"></Input> 
       </form>
     );
+
     return (
-      <MainDisplay>
-        {form}
-      </MainDisplay>
+      <Fragment>
+        <div>
+          {form}
+        </div>
+      </Fragment>
     );
   }
 }
