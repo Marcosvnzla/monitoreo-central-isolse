@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import axios from 'axios';
 
 const authStart = (token) => {
   return {
@@ -7,11 +8,21 @@ const authStart = (token) => {
   }
 }
 
-export const authInit = () => {
-  return (dispatch, getState)=> {
-    setTimeout(() => {
-      dispatch(authStart('hi Im working again :3'));
-      console.log(getState());
-    }, 2000);
+export const authInit = (email, password) => {
+  return dispatch => {
+    const authData = {
+      email: email,
+      password: password,
+      returnSecureToken: true
+    }
+
+    axios.post(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`, authData)
+    .then(response => {
+      console.log(response);
+      dispatch(authStart(response.data.idToken));
+    })
+    .catch(e => {
+      console.log(e);
+    })
   }
 }

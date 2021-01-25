@@ -42,8 +42,9 @@ class Auth extends Component {
   }
 
   login = () => {
-    this.props.onLogin();
-    console.log(this.props.token);
+    const email = this.state.formData.email.value;
+    const password = this.state.formData.password.value;
+    this.props.onLogin(email, password);
   }
 
   render () {
@@ -84,7 +85,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: () => dispatch(actions.authInit())
+    onLogin: (email, password) => dispatch(actions.authInit(email, password))
   }
 }
 
