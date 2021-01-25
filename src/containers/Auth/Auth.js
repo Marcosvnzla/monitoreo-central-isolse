@@ -1,5 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import Input from '../../components/UI/Input/Input';
+import Button from '../../components/UI/Button/Button';
+import * as actions from '../../store/actions/index';
 
 class Auth extends Component {
   state = {
@@ -25,7 +28,7 @@ class Auth extends Component {
     }
   }
 
-  inputChanged (event, formElement) {
+  inputChanged = (event, formElement) => {
     const updatedFormData = {
       ...this.state.formData
     }
@@ -36,6 +39,11 @@ class Auth extends Component {
     updatedFormData[formElement] = updatedFormElement;
     this.setState({formData: updatedFormData});
     console.log(this.state.formData[formElement].value);
+  }
+
+  login = () => {
+    this.props.onLogin();
+    console.log(this.props.token);
   }
 
   render () {
@@ -62,9 +70,22 @@ class Auth extends Component {
         <form>
           {formElementsList}
         </form>
+          <Button btnType="Success" clicked={this.login}>Ingresar</Button>
       </Fragment>
     );
   }
 }
 
-export default Auth;
+const mapStateToProps = state => {
+  return {
+    token: state.token
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: () => dispatch(actions.authStart())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
