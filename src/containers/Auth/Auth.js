@@ -21,7 +21,7 @@ class Auth extends Component {
         value: '',
         elementConfig: {
           name: 'password',
-          type: 'input',
+          type: 'password',
           placeholder: 'Password'
         }
       },
@@ -38,7 +38,6 @@ class Auth extends Component {
     updatedFormElement.value = event.target.value;
     updatedFormData[formElement] = updatedFormElement;
     this.setState({formData: updatedFormData});
-    console.log(this.state.formData[formElement].value);
   }
 
   login = () => {
@@ -60,9 +59,10 @@ class Auth extends Component {
       return (
         <Input elementType={formElement.config.elementType}
                label={formElement.id}
-               value={formElement.value}
+               value={formElement.config.value}
                changed={(event) => {this.inputChanged(event, formElement.id)}}
-               key={formElement.id} />
+               key={formElement.id}
+               elementConfig={formElement.config.elementConfig} />
       );
     });
 
