@@ -5,31 +5,63 @@ class Auth extends Component {
   state = {
     formData: {
       email: {
-        value: ''
+        elementType: 'input',
+        value: '',
+        elementConfig: {
+          name: 'email',
+          type: 'input',
+          placeholder: 'Email'
+        }
       },
       password: {
-        value: ''
+        elementType: 'input',
+        value: '',
+        elementConfig: {
+          name: 'password',
+          type: 'input',
+          placeholder: 'Password'
+        }
       },
     }
   }
 
-  inputChanged (event) {
-    console.log(event.target.value);
+  inputChanged (event, formElement) {
+    const updatedFormData = {
+      ...this.state.formData
+    }
+    const updatedFormElement = {
+      ...updatedFormData[formElement]
+    }
+    updatedFormElement.value = event.target.value;
+    updatedFormData[formElement] = updatedFormElement;
+    this.setState({formData: updatedFormData});
+    console.log(this.state.formData[formElement].value);
   }
 
   render () {
-    let form = (
-      <form>
-        <Input elementType="input" label="email" value={this.state.formData.email.value} changed={this.inputChanged} /> 
-        <Input elementType="input" label="password" value={this.state.formData.password.value} changed={this.inputChanged} />
-      </form>
-    );
+    const formArray = [];
+    for (let key in this.state.formData) {
+      formArray.push({
+        id: key,
+        config: this.state.formData[key]
+      });
+    }
+
+    const formElementsList = formArray.map(formElement => {
+      return (
+        <Input elementType={formElement.config.elementType}
+               label={formElement.id}
+               value={formElement.value}
+               changed={(event) => {this.inputChanged(event, formElement.id)}}
+               key={formElement.id} />
+      );
+    });
 
     return (
       <Fragment>
-        <div>
-          {form}
-        </div>
+        <form>
+          {formElementsList}
+        </form>
       </Fragment>
     );
   }
