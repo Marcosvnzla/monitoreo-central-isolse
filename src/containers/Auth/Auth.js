@@ -84,7 +84,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: () => dispatch(actions.authStart())
+    onLogin: () => dispatch(actions.authInit())
   }
 }
 
