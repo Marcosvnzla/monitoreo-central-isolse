@@ -1,18 +1,20 @@
 .Button {
-    background-color: transparent;
+    background-color: #F5A915;
     border: none;
     color: white;
     outline: none;
     cursor: pointer;
-    font: inherit;
-    padding: 10px;
+    font-family: 'Montserrat';
+    padding: 16px;
     margin: 10px;
+    margin-top: 50px;
+    text-align: center;
     font-weight: bold;
+    border-radius: 16px;
 }
 
 .Button:first-of-type {
     margin-left: 0;
-    padding-left: 0;
 }
 
 .Button:disabled {
@@ -21,9 +23,9 @@
 }
 
 .Success {
-    color: #5C9210;
+    color: #002835;
 }
 
 .Danger {
-    color: #944317;
+    background-color: #944317;
 }

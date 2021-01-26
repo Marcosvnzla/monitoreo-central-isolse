@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import styles from './Auth.module.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import ImageContainer from '../../components/ImageContainer/ImageContainer';
+import logo from '../../assets/images/bigLogo_img.png';
+import lineBreaker from '../../assets/images/line_breaker.png';
 import * as actions from '../../store/actions/index';
 
 class Auth extends Component {
@@ -22,7 +26,7 @@ class Auth extends Component {
         elementConfig: {
           name: 'password',
           type: 'password',
-          placeholder: 'Password'
+          placeholder: 'Contraseña'
         }
       },
     }
@@ -40,7 +44,8 @@ class Auth extends Component {
     this.setState({formData: updatedFormData});
   }
 
-  login = () => {
+  login = (event) => {
+    event.preventDefault();
     const email = this.state.formData.email.value;
     const password = this.state.formData.password.value;
     this.props.onLogin(email, password);
@@ -58,7 +63,6 @@ class Auth extends Component {
     const formElementsList = formArray.map(formElement => {
       return (
         <Input elementType={formElement.config.elementType}
-               label={formElement.id}
                value={formElement.config.value}
                changed={(event) => {this.inputChanged(event, formElement.id)}}
                key={formElement.id}
@@ -67,12 +71,18 @@ class Auth extends Component {
     });
 
     return (
-      <Fragment>
-        <form>
+      <div className={styles.Auth}>
+        <form onSubmit={(event) => {this.login(event)}}>
+          <ImageContainer imageImport={logo}/>
           {formElementsList}
+          <Button btnType="Success">Ingresar</Button>
         </form>
-          <Button btnType="Success" clicked={this.login}>Ingresar</Button>
-      </Fragment>
+        <ImageContainer imageImport={lineBreaker} moreStyles={{height: '400px'}}/>
+        <div className={styles.extraInfo}>
+          <h1>Extra</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eleifend non libero non cursus. Vivamus eu lectus interdum, maximus eros a, tincidunt elit. Etiam turpis magna, mollis sit amet tortor ut, ultricies ornare magna.</p>
+        </div>
+      </div>
     );
   }
 }

@@ -1,5 +1,5 @@
 .Input {
-  box-sizing: border-box;
+  font-family: 'Montserrat';
   width: 100%;
   padding: 10px;
 }
@@ -14,15 +14,32 @@
   display: block;
   width: 100%;
   outline: none;
-  border: 1px solid #eee;
-  background-color: white;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+  color: #BDBDBD;
   font: inherit;
-  padding: 6px 10px;
+  padding: 10px 16px;
 }
 
 .InputElement:focus {
   outline: none;
-  background-color: #ccc;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.InputElement:-webkit-autofill,
+.InputElement:-webkit-autofill:hover, 
+.InputElement:-webkit-autofill:focus
+{
+  border: none;
+  -webkit-text-fill-color: #BDBDBD;
+  -webkit-box-shadow: none;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.InputElement::placeholder {
+  color: #777777;
+  font-family: 'Montserrat';
 }
 
 .Invalid {
