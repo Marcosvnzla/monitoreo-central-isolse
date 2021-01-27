@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import Toolbar from '../Navigation/Toolbar/Toolbar';
+import Sidebar from '../Navigation/Sidebar/Sidebar';
 
 class Layout extends Component {
   render () {
