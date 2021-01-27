@@ -1,0 +1,14 @@
+.ImageContainer {
+  padding: 8px;
+  height: 100%;
+  margin-bottom: 22px;
+}
+
+.ImageContainer img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  border-radius: inherit;
+}
