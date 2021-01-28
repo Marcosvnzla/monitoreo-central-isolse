@@ -4,11 +4,9 @@ import styles from './Sidebar.module.css';
 
 const toolbar = () => {
   return (
-    <div className={styles.Toolbar}>
-      <nav>
+    <nav className={styles.Toolbar}>
         <NavItems />
-      </nav>
-    </div>
+    </nav>
   );
 }
 

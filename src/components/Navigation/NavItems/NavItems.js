@@ -5,7 +5,7 @@ import styles from './NavItems.module.css';
 const navItems = () => {
   return (
     <ul className={styles.NavItems}>
-      <NavItem link="/central">Central</NavItem>
+      <NavItem link="/">Central</NavItem>
     </ul>
   );
 }

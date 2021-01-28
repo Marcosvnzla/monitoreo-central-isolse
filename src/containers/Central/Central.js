@@ -7,10 +7,10 @@ import MessageLogger from './MessageLogger/MessageLogger';
 class Central extends Component {
   render () {
     return (
-      <div className={styles.Central}>
-        <ImageContainer imageImport={centralIcon} moreStyles={{width: '250px', height: '400px', borderRadius: '15px'}}/>
-        <MessageLogger/>
-      </div>
+        <div className={styles.Central}>
+          <ImageContainer imageImport={centralIcon} moreStyles={{width: '250px', height: '400px', borderRadius: '15px', margin: '0 auto'}}/>
+          <MessageLogger/>
+        </div>
     );
   }
 }
