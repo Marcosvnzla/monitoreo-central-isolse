@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
-import Auth from './containers/Auth/Auth';
 import Layout from './components/Layout/Layout';
+import Auth from './containers/Auth/Auth';
 import Central from './containers/Central/Central';
+import CentralDataLoader from './containers/CentralDataLoader/CentralDataLoader';
 
 class App extends Component {
   render () {
+    //non authorized routes
     let routes = (
       <Switch>
         <Route path="/auth" component={Auth} />
@@ -19,6 +21,7 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/" exact component={Central} />
+          <Route path="/dataLoader" component={CentralDataLoader} />
           <Redirect to="/"/>
         </Switch>
       );

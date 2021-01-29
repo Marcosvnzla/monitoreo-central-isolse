@@ -6,6 +6,7 @@ const navItems = () => {
   return (
     <ul className={styles.NavItems}>
       <NavItem link="/">Central</NavItem>
+      <NavItem link="/dataLoader">Cargar Datos</NavItem>
     </ul>
   );
 }
