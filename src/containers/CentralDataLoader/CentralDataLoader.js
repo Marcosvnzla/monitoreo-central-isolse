@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styles from './CentralDataLoader.module.css';
+import * as actions from '../../store/actions/index';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 
@@ -66,6 +68,11 @@ class CentralDataLoader extends Component {
     updatedFormData[formElement] = updatedFormElement;
     this.setState({formData: updatedFormData});
   }
+
+  loadFormData = (event) => {
+    event.preventDefault();
+    this.props.onLoad(this.props.uid, this.state.formData);
+  }
   
   render () {
     const formArray = [];
@@ -87,7 +94,7 @@ class CentralDataLoader extends Component {
     });
 
     return (
-      <form className={styles.CentralDataLoader}>
+      <form onSubmit={(event) => {this.loadFormData(event)}} className={styles.CentralDataLoader}>
         {formElementsList}
         <Button btnType="Success">Ingresar</Button>
       </form>
@@ -95,4 +102,16 @@ class CentralDataLoader extends Component {
   }
 }
 
-export default CentralDataLoader;
+const mapStateToProps = state => {
+  return {
+    uid: state.userId
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onLoad: (uid, formData) => dispatch(actions.loadInit(uid, formData))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CentralDataLoader);
