@@ -71,7 +71,7 @@ class CentralDataLoader extends Component {
 
   loadFormData = (event) => {
     event.preventDefault();
-    this.props.onLoad(this.props.uid, this.state.formData);
+    this.props.onLoad(this.props.token, this.props.uid, this.state.formData);
   }
   
   render () {
@@ -104,13 +104,14 @@ class CentralDataLoader extends Component {
 
 const mapStateToProps = state => {
   return {
+    token: state.token,
     uid: state.userId
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoad: (uid, formData) => dispatch(actions.loadInit(uid, formData))
+    onLoad: (token, uid, formData) => dispatch(actions.loadInit(token, uid, formData))
   }
 }
 
