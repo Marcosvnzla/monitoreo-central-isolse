@@ -71,7 +71,13 @@ class CentralDataLoader extends Component {
 
   loadFormData = (event) => {
     event.preventDefault();
-    this.props.onLoad(this.props.token, this.props.uid, this.state.formData);
+    const postData = {};
+
+    for (let key in this.state.formData) {
+      postData[key] = this.state.formData[key].value;
+    }
+
+    this.props.onLoad(this.props.token, this.props.uid, postData);
   }
   
   render () {
