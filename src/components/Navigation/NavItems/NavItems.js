@@ -7,6 +7,7 @@ const navItems = () => {
     <ul className={styles.NavItems}>
       <NavItem link="/">Central</NavItem>
       <NavItem link="/dataLoader">Cargar Datos</NavItem>
+      <NavItem link="/logout">Salir</NavItem>
     </ul>
   );
 }

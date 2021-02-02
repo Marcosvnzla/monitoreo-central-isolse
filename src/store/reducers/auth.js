@@ -20,6 +20,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         token: action.token,
         userId: action.userId,
+        isLoggedIn: true,
         loading: false
       }
 
@@ -27,6 +28,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false
+      }
+
+    case actionTypes.LOGOUT:
+      return {
+        ...state,
+        token: null,
+        userId: null,
+        isLoggedIn: false
       }
   
     default:

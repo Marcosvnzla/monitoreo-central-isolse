@@ -6,6 +6,7 @@ import Layout from './components/Layout/Layout';
 import Auth from './containers/Auth/Auth';
 import Central from './containers/Central/Central';
 import CentralDataLoader from './containers/CentralDataLoader/CentralDataLoader';
+import Logout from './containers/Auth/Logout/Logout';
 
 class App extends Component {
   render () {
@@ -22,6 +23,7 @@ class App extends Component {
         <Switch>
           <Route path="/" exact component={Central} />
           <Route path="/dataLoader" component={CentralDataLoader} />
+          <Route path="/logout" component={Logout} />
           <Redirect to="/"/>
         </Switch>
       );
