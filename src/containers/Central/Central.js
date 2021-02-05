@@ -5,6 +5,7 @@ import ImageContainer from '../../components/ImageContainer/ImageContainer';
 import MessageLogger from './MessageLogger/MessageLogger';
 
 class Central extends Component {
+
   render () {
     return (
         <div className={styles.Central}>

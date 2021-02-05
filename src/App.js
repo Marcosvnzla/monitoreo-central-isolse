@@ -13,6 +13,7 @@ class App extends Component {
   componentDidMount () {
     this.props.onAuthCheckStatus();
   }
+
   render () {
     //non authorized routes
     let routes = (

@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   token: null,
   userId: null,
+  refreshToken: null,
   isLoggedIn: false,
   loading: false
 }
@@ -20,6 +21,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         token: action.token,
         userId: action.userId,
+        refreshToken: action.refreshToken,
         isLoggedIn: true,
         loading: false
       }
@@ -37,7 +39,13 @@ const reducer = (state = initialState, action) => {
         userId: null,
         isLoggedIn: false
       }
-  
+
+    case actionTypes.TOKEN_REFRESH:
+      return {
+        ...state,
+        token: action.newToken
+      }
+
     default:
       return state;
   }
