@@ -22,8 +22,22 @@ const authFail = () => {
 }
 
 export const logout = () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
   return {
     type: actionTypes.LOGOUT
+  }
+}
+
+export const authCheckStatus = () => {
+  return dispatch => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      dispatch(logout());
+    } else {
+      const userId = localStorage.getItem('userId');
+      dispatch(authSuccess(token, userId));
+    }
   }
 }
 
@@ -42,6 +56,8 @@ export const authInit = (email, password) => {
       console.log(response);
       const token = response.data.idToken;
       const userId = response.data.localId;
+      localStorage.setItem('token', token);
+      localStorage.setItem('userId', userId);
       dispatch(authSuccess(token, userId));
     })
     .catch(e => {

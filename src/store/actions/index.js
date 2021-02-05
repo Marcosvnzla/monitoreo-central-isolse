@@ -1,2 +1,2 @@
-export { authInit, logout } from './auth';
+export { authInit, logout, authCheckStatus } from './auth';
 export { loadInit } from './centralDataLoad';

@@ -7,8 +7,12 @@ import Auth from './containers/Auth/Auth';
 import Central from './containers/Central/Central';
 import CentralDataLoader from './containers/CentralDataLoader/CentralDataLoader';
 import Logout from './containers/Auth/Logout/Logout';
+import * as actions from './store/actions/index';
 
 class App extends Component {
+  componentDidMount () {
+    this.props.onAuthCheckStatus();
+  }
   render () {
     //non authorized routes
     let routes = (
@@ -40,8 +44,15 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.token !== null
+    isAuthenticated: state.token !== null,
+    token: state.token
   }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+  return {
+    onAuthCheckStatus: () => dispatch(actions.authCheckStatus())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
