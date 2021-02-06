@@ -1,109 +1,88 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as Yup from 'yup';
+import { Formik, Form } from 'formik';
 import styles from './CentralDataLoader.module.css';
 import * as actions from '../../store/actions/index';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+
+const formSchema = Yup.object().shape({
+});
 
 class CentralDataLoader extends Component {
 
   state = {
     formData: {
       nombre: {
-        elementType: 'input',
+        type: 'input',
+        name: 'nombre',
         value: '',
-        elementConfig: {
-          name: 'nombre',
-          type: 'input',
-          placeholder: 'Nombre de las instalaciones'
-        }
+        placeholder: 'Nombre de las instalaciones'
       },
       brand: {
-        elementType: 'input',
         value: '',
-        elementConfig: {
-          name: 'marca',
-          type: 'input',
-          placeholder: 'Marca'
-        }
+        name: 'marca',
+        type: 'input',
+        placeholder: 'Marca'
       },
       devices: {
-        elementType: 'input',
         value: '',
-        elementConfig: {
-          name: 'dispositivos',
-          type: 'number',
-          placeholder: 'Número de dispositivos'
-        }
+        name: 'dispositivos',
+        type: 'number',
+        placeholder: 'Número de dispositivos'
       },
       model: {
-        elementType: 'input',
         value: '',
-        elementConfig: {
-          name: 'Modelo',
-          type: 'input',
-          placeholder: 'Modelo'
-        }
+        name: 'Modelo',
+        type: 'input',
+        placeholder: 'Modelo'
       },
       location: {
-        elementType: 'input',
         value: '',
-        elementConfig: {
-          name: 'dirección',
-          type: 'input',
-          placeholder: 'Dirección completa'
-        }
+        name: 'dirección',
+        type: 'input',
+        placeholder: 'Dirección completa'
       },
     }
   }
 
-  inputChanged = (event, formElement) => {
-    const updatedFormData = {
-      ...this.state.formData
-    }
-    const updatedFormElement = {
-      ...updatedFormData[formElement]
-    }
-    updatedFormElement.value = event.target.value;
-    updatedFormData[formElement] = updatedFormElement;
-    this.setState({formData: updatedFormData});
-  }
-
-  loadFormData = (event) => {
-    event.preventDefault();
-    const postData = {};
-
-    for (let key in this.state.formData) {
-      postData[key] = this.state.formData[key].value;
-    }
-
-    this.props.onLoad(this.props.token, this.props.uid, postData);
+  loadFormData = (values) => {
+    console.log(values);
+    this.props.onLoad(this.props.token, this.props.uid, values);
   }
   
   render () {
     const formArray = [];
+    const initialValues = {};
     for (let key in this.state.formData) {
       formArray.push({
         id: key,
         config: this.state.formData[key]
       });
+
+      initialValues[key] = this.state.formData[key].value;
     }
 
     const formElementsList = formArray.map(formElement => {
       return (
-        <Input elementType={formElement.config.elementType}
-               value={formElement.config.value}
-               changed={(event) => {this.inputChanged(event, formElement.id)}}
+        <Input name={formElement.config.name}
+               type={formElement.config.type}
                key={formElement.id}
-               elementConfig={formElement.config.elementConfig} />
+               placeholder={formElement.config.placeholder} />
       );
     });
 
     return (
-      <form onSubmit={(event) => {this.loadFormData(event)}} className={styles.CentralDataLoader}>
-        {formElementsList}
-        <Button btnType="Success">Ingresar</Button>
-      </form>
+      <Formik 
+              onSubmit={values => this.loadFormData(values)}
+              initialValues={initialValues}
+               >
+        <Form className={styles.CentralDataLoader}>
+          {formElementsList}
+          <Button btnType="Success">Ingresar</Button>
+        </Form>
+      </Formik>
     );
   }
 }
