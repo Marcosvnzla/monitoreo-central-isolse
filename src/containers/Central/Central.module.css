@@ -4,3 +4,22 @@
   align-items: center;
   height: 100vh;
 }
+
+.display {
+  margin: 0 auto;
+  width: 60%;
+  height: 80vh;
+  background-color: #BF2222;
+  border-radius: 8px;
+}
+
+.display div {
+  width: 80%;
+  min-height: 50%;
+  max-height: 80%;
+  background-color: white;
+  margin: 0 auto;
+  margin-top: 96px;
+  border-radius: 10px;
+  border: 6px solid black;
+}

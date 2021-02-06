@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as Yup from 'yup';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import styles from './Auth.module.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
@@ -8,46 +10,39 @@ import logo from '../../assets/images/bigLogo_img.png';
 import lineBreaker from '../../assets/images/line_breaker.png';
 import * as actions from '../../store/actions/index';
 
+const formSchema = Yup.object().shape({
+  email: Yup.string().email('email invalido'),
+  password: Yup.string().min(6, '6 caracteres como mínimo')
+});
+
 class Auth extends Component {
+
   state = {
+    formInitialValues: {
+      email: '',
+      password: ''
+    },
     formData: {
       email: {
-        elementType: 'input',
-        value: '',
-        elementConfig: {
-          name: 'email',
-          type: 'input',
-          placeholder: 'Email'
-        }
+        type: 'email',
+        name: 'email',
+        placeholder: 'Email',
+        label: 'Email',
+        value: ''
       },
       password: {
-        elementType: 'input',
-        value: '',
-        elementConfig: {
-          name: 'password',
-          type: 'password',
-          placeholder: 'Contraseña'
-        }
-      },
+        type: 'password',
+        name: 'password',
+        placeholder: 'Contraseña',
+        label: 'Contraseña',
+        value: ''
+      }
     }
   }
 
-  inputChanged = (event, formElement) => {
-    const updatedFormData = {
-      ...this.state.formData
-    }
-    const updatedFormElement = {
-      ...updatedFormData[formElement]
-    }
-    updatedFormElement.value = event.target.value;
-    updatedFormData[formElement] = updatedFormElement;
-    this.setState({formData: updatedFormData});
-  }
-
-  login = (event) => {
-    event.preventDefault();
-    const email = this.state.formData.email.value;
-    const password = this.state.formData.password.value;
+  login = (values) => {
+    const email = values.email;
+    const password = values.password;
     this.props.onLogin(email, password);
   }
 
@@ -62,21 +57,25 @@ class Auth extends Component {
 
     const formElementsList = formArray.map(formElement => {
       return (
-        <Input elementType={formElement.config.elementType}
-               value={formElement.config.value}
-               changed={(event) => {this.inputChanged(event, formElement.id)}}
+        <Input name={formElement.config.name}
+               type={formElement.config.type}
                key={formElement.id}
-               elementConfig={formElement.config.elementConfig} />
+               placeholder={formElement.config.placeholder} />
       );
     });
 
     return (
       <div className={styles.Auth}>
-        <form onSubmit={(event) => {this.login(event)}}>
-          <ImageContainer imageImport={logo}/>
-          {formElementsList}
-          <Button btnType="Success">Ingresar</Button>
-        </form>
+        <Formik 
+                validationSchema={formSchema}
+                onSubmit={values => this.login(values)}
+                initialValues={this.state.formInitialValues}>
+          <Form>
+            <ImageContainer imageImport={logo} />
+            {formElementsList}
+            <Button typeOfButton="submit" btnType="Success">Ingresar</Button>
+          </Form>
+        </Formik>
         <ImageContainer imageImport={lineBreaker} moreStyles={{height: '400px'}}/>
         <div className={styles.extraInfo}>
           <h1>Extra</h1>
