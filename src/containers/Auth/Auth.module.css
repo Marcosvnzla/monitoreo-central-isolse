@@ -35,3 +35,32 @@
 .extraInfo p {
   font-size: 16px;
 }
+
+@media (max-width: 768px) {
+  .extraInfo {
+    display: none;
+  }
+ 
+  .lineBreakerContainer {
+    display: none;
+  }
+ 
+  .Auth form {
+    width: 90%;
+  }
+}
+ 
+@media (max-width: 480px) {
+  .Auth {
+    margin: 0px;
+    height: 100vh;
+    width: 100%;
+    border-radius: 0px;
+  }
+ 
+  .Auth form {
+    width: 100%;
+    padding: 0px;
+    margin-right: 0px;
+  }
+}

@@ -5,3 +5,10 @@
   background-color: #ffb477;
   border-radius: 15px;
 }
+
+@media (max-width: 480px) {
+  .CentralDataLoader {
+    width: 95%;
+    margin: 16px auto;
+  }
+}

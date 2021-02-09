@@ -76,7 +76,9 @@ class Auth extends Component {
             <Button typeOfButton="submit" btnType="Success">Ingresar</Button>
           </Form>
         </Formik>
-        <ImageContainer imageImport={lineBreaker} moreStyles={{height: '400px'}}/>
+        <div className={styles.lineBreakerContainer}>
+          <ImageContainer imageImport={lineBreaker} moreStyles={{height: '400px'}}/>
+        </div>
         <div className={styles.extraInfo}>
           <h1>Extra</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eleifend non libero non cursus. Vivamus eu lectus interdum, maximus eros a, tincidunt elit. Etiam turpis magna, mollis sit amet tortor ut, ultricies ornare magna.</p>

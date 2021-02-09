@@ -23,3 +23,28 @@
   border-radius: 10px;
   border: 6px solid black;
 }
+
+@media (max-width: 768px) {
+  .Central {
+    margin-top: 64px;
+    height: calc(100vh - 64px);
+  }
+}
+ 
+@media (max-width: 480px) {
+  .Central {
+    margin-top: 64px;
+    flex-direction: column;
+  }
+
+  .display {
+    margin: 8px auto;
+    width: 95%;
+  }
+
+  .display div {
+    margin-top: 48px;
+    min-height: 70%;
+    width: 90%;
+  }
+}
