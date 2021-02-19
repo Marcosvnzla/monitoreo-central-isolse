@@ -5,33 +5,49 @@ import styles from './Central.module.css';
 import MessageLogger from './MessageLogger/MessageLogger';
 import Message from './Message/Message';
 
-
 class Central extends Component {
   state = {
-    deviceInfo: ''
+    deviceInfo: '',
+    abnormalDevices: null
   }
 
   componentDidMount () {
     const abnormalDevices = firebase.database().ref(`${this.props.userId}/Abnormal_Devices`);
     abnormalDevices.on('value', (snapshot) => {
       const data = snapshot.val();
-      const eventDate = `${new Date().toDateString()} ${new Date().getHours()}:${new Date().getMinutes()}`;
-      console.log(eventDate);
-      const firstDevice = data[Object.keys(data)[0]];
-      firstDevice.date = eventDate;
-      this.setState({deviceInfo: firstDevice});
+      this.setState({abnormalDevices: data})
     }, error => {console.log(error)});
   }
 
   render () {
+    const abnormalDevicesArray = [];
+    let abnormalDevicesList = [];
+    if (this.state.abnormalDevices !== null) {
+      for (let key in this.state.abnormalDevices) {
+        abnormalDevicesArray.push(this.state.abnormalDevices[key]);
+      }
+
+      abnormalDevicesList = abnormalDevicesArray.map((device, index) => {
+        return (
+          <Message message={device.message}
+                   position={`${index + 1} de ${abnormalDevicesArray.length}`}
+                   date={device.date}
+                   id={device.id}
+                   fuego={device.status}
+                   key={index} />
+        );
+      });
+    }
+    console.log(abnormalDevicesList);
+
     return (
         <div className={styles.Central}>
           <div className={styles.display}>
             <div className={styles.messageContainer}>
-              <Message message="Test Message" position="1 of 2" date={this.state.deviceInfo.date} id={this.state.deviceInfo.id} />
+              {abnormalDevicesList[0]}
             </div>
           </div>
-          <MessageLogger/>
+          <MessageLogger messageList={abnormalDevicesList}/>
         </div>
     );
   }
