@@ -10,5 +10,12 @@
   .CentralDataLoader {
     width: 95%;
     margin: 16px auto;
+    margin-top: 96px;
+  }
+}
+
+@media (max-width: 768px) {
+  .CentralDataLoader {
+    margin-top: 96px;
   }
 }

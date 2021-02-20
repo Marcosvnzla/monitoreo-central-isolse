@@ -1,5 +1,8 @@
 .SideDrawer {
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 0;
   left: 0;
   width: 40%;
@@ -7,6 +10,7 @@
   z-index: 500;
   background-color: white;
   transition: transform 300ms ease-out;
+  font-family: 'Lato';
 }
 
 .open {
