@@ -17,7 +17,12 @@ const message = (props) => {
         <li>{props.id}</li>
         <li>{props.date}</li>
       </ul>
-      {props.message}
+      <div className={styles.messageContainer}>
+        {props.type}
+        <br/>
+        <br/>
+        {props.status}
+      </div>
     </div>
   );
 }

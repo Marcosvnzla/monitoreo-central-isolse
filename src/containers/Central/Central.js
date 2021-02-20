@@ -29,7 +29,8 @@ class Central extends Component {
 
       abnormalDevicesList = abnormalDevicesArray.map((device, index) => {
         return (
-          <Message message={device.message}
+          <Message type={device.type}
+                   status={device.status}
                    position={`${index + 1} de ${abnormalDevicesArray.length}`}
                    date={device.date}
                    id={device.id}
