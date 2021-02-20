@@ -21,7 +21,7 @@ class Layout extends Component {
     return (
       <div className={styles.Layout}>
         <Backdrop show={this.state.showDrawer} clicked={this.showDrawer} />
-        <SideDrawer bstate={this.state.showDrawer} />
+        <SideDrawer navClicked={this.showDrawer} bstate={this.state.showDrawer} />
         {this.props.isAuthenticated ? <Sidebar logoClicked={this.showDrawer}/> : null}
         {this.props.children}
       </div>

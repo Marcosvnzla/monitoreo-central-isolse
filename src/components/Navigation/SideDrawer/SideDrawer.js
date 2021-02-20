@@ -11,7 +11,7 @@ const sideDrawer = (props) => {
   
   return (
     <div className={classes.join(' ')}>
-      <NavItems moreStyles={{flexDirection: 'column', display: 'flex'}}/>
+      <NavItems clicked={props.navClicked} moreStyles={{flexDirection: 'column', display: 'flex'}}/>
     </div>    
   );
 }
