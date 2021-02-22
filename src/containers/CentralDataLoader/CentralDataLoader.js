@@ -18,31 +18,36 @@ class CentralDataLoader extends Component {
         type: 'input',
         name: 'nombre',
         value: '',
-        placeholder: 'Nombre de las instalaciones'
+        placeholder: 'Nombre de las instalaciones',
+        label: 'Nombre'
       },
       brand: {
         value: '',
         name: 'marca',
         type: 'input',
-        placeholder: 'Marca'
+        placeholder: 'Marca',
+        label: 'Marca'
       },
       devices: {
         value: '',
         name: 'dispositivos',
         type: 'number',
-        placeholder: 'Número de dispositivos'
+        placeholder: 'Número de dispositivos',
+        label: 'Cantidad'
       },
       model: {
         value: '',
         name: 'Modelo',
         type: 'input',
-        placeholder: 'Modelo'
+        placeholder: 'Modelo',
+        label: 'Modelo'
       },
       location: {
         value: '',
         name: 'dirección',
         type: 'input',
-        placeholder: 'Dirección completa'
+        placeholder: 'Dirección completa',
+        label: 'Dirección'
       },
     }
   }
@@ -69,6 +74,7 @@ class CentralDataLoader extends Component {
         <Input name={formElement.config.name}
                type={formElement.config.type}
                key={formElement.id}
+               label={formElement.config.label}
                placeholder={formElement.config.placeholder} />
       );
     });
