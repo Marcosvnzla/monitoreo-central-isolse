@@ -7,6 +7,7 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import ImageContainer from '../../components/ImageContainer/ImageContainer';
 import logo from '../../assets/images/bigLogo_img.png';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import lineBreaker from '../../assets/images/line_breaker.png';
 import * as actions from '../../store/actions/index';
 
@@ -64,6 +65,25 @@ class Auth extends Component {
       );
     });
 
+    let errMessage = '';
+    console.log(this.props.errorMessage);
+    switch (this.props.errorMessage) {
+      case 'INVALID_EMAIL':
+        errMessage = 'Email o contraseña incorrectos'; 
+        break;
+
+      case 'INVALID_PASSWORD':
+        errMessage = 'Email o contraseña incorrectos'; 
+        break;
+
+      case 'MISSING_PASSWORD':
+        errMessage = 'Por favor introduzca contraseña'; 
+        break;
+
+      default:
+        break;
+    }
+
     return (
       <div className={styles.Auth}>
         <Formik 
@@ -73,7 +93,8 @@ class Auth extends Component {
           <Form>
             <ImageContainer imageImport={logo} />
             {formElementsList}
-            <Button typeOfButton="submit" btnType="Success">Ingresar</Button>
+            {this.props.isLoading ? <Spinner/> : <Button typeOfButton="submit" btnType="Success">Ingresar</Button>}
+            <p style={{color: '#940f00'}}>{errMessage}</p>
           </Form>
         </Formik>
         <div className={styles.lineBreakerContainer}>
@@ -90,7 +111,9 @@ class Auth extends Component {
 
 const mapStateToProps = state => {
   return {
-    token: state.token
+    token: state.token,
+    isLoading: state.loading,
+    errorMessage: state.errorMessage
   }
 }
 

@@ -4,6 +4,7 @@ import firebase from '../../Firebase';
 import styles from './Central.module.css';
 import MessageLogger from './MessageLogger/MessageLogger';
 import Message from './Message/Message';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Central extends Component {
   state = {
@@ -45,7 +46,7 @@ class Central extends Component {
         <div className={styles.Central}>
           <div className={styles.display}>
             <div className={styles.messageContainer}>
-              {abnormalDevicesList[0]}
+              {abnormalDevicesList[0] ? abnormalDevicesList[0] : <Spinner/>}
             </div>
           </div>
           <MessageLogger messageList={abnormalDevicesList}/>

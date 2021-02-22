@@ -5,7 +5,8 @@ const initialState = {
   userId: null,
   refreshToken: null,
   isLoggedIn: false,
-  loading: false
+  loading: false,
+  errorMessage: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -13,7 +14,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.AUTH_START:
       return {
         ...state,
-        loading: true
+        loading: true,
+        errorMessage: ''
       }
     
     case actionTypes.AUTH_SUCCESS:
@@ -29,7 +31,8 @@ const reducer = (state = initialState, action) => {
     case actionTypes.AUTH_FAIL:
       return {
         ...state,
-        loading: false
+        loading: false,
+        errorMessage: action.errorMessage
       }
 
     case actionTypes.LOGOUT:

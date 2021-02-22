@@ -16,9 +16,10 @@ const authSuccess = (token, userId, refreshToken) => {
   }
 }
 
-const authFail = () => {
+const authFail = (errorMessage) => {
   return {
-    type: actionTypes.AUTH_FAIL
+    type: actionTypes.AUTH_FAIL,
+    errorMessage: errorMessage
   }
 }
 
@@ -116,7 +117,7 @@ export const authInit = (email, password) => {
     })
     .catch(e => {
       console.log(`Error message: ${e.response.data.error.message}`);
-      dispatch(authFail());
+      dispatch(authFail(e.response.data.error.message));
     })
   }
 }
