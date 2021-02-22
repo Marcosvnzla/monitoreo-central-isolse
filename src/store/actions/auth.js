@@ -76,8 +76,9 @@ export const authCheckStatus = () => {
   return dispatch => {
     const token = localStorage.getItem('token');
     const refreshToken = localStorage.getItem('refreshToken');
+    const userId = localStorage.getItem('userId');
     const expirationDate = new Date(localStorage.getItem('expirationDate'));
-    if (!token || !refreshToken || !expirationDate) {
+    if (!token || !refreshToken || !expirationDate || !userId) {
       dispatch(logout());
     } else {
       if (expirationDate <= new Date() && !!refreshToken) {
