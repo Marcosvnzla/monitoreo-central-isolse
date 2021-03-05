@@ -21,6 +21,9 @@ const message = (props) => {
         {props.type}
         <br/>
         <br/>
+        {props.name}
+        <br/>
+        <br/>
         {props.status}
       </div>
     </div>

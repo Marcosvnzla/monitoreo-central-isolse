@@ -35,6 +35,7 @@ class Central extends Component {
                    position={`${index + 1} de ${abnormalDevicesArray.length}`}
                    date={device.date}
                    id={device.id}
+                   name={device.name}
                    fuego={device.status}
                    key={index} />
         );
