@@ -5,6 +5,7 @@ import styles from './Central.module.css';
 import MessageLogger from './MessageLogger/MessageLogger';
 import Message from './Message/Message';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import * as actions from '../../store/actions/index';
 
 class Central extends Component {
   state = {
@@ -13,11 +14,13 @@ class Central extends Component {
   }
 
   componentDidMount () {
-    const abnormalDevices = firebase.database().ref(`${this.props.userId}/Abnormal_Devices`);
+    const abnormalDevices = firebase.database().ref(`${this.props.userId}/CABA/Abnormal_Devices`); // CABA provisorio, cambiar por ${this.props.currentCentral}
     abnormalDevices.on('value', (snapshot) => {
       const data = snapshot.val();
       this.setState({abnormalDevices: data})
     }, error => {console.log(error)});
+
+    this.props.onGetCentrales(this.props.userId);
   }
 
   render () {
@@ -63,4 +66,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Central);
+const mapDispatchToProps = dispatch => {
+  return {
+    onGetCentrales: (uid) => dispatch(actions.getCentrales(uid))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Central);

@@ -6,7 +6,8 @@ const initialState = {
   refreshToken: null,
   isLoggedIn: false,
   loading: false,
-  errorMessage: ''
+  errorMessage: '',
+  centrales: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -47,6 +48,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         token: action.newToken
+      }
+
+    case actionTypes.LOAD_CENTRALES:
+      return {
+        ...state,
+        centrales: action.centrales
       }
 
     default:

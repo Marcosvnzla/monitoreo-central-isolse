@@ -7,12 +7,12 @@ const loadStart = () => {
   }
 }
 
-export const loadInit = (token,uid, formData) => {
+export const loadInit = (token,uid, formData, currentCentral) => {
   return dispatch => {
     dispatch(loadStart());
     console.log(uid)
 
-    axios.put(`${process.env.REACT_APP_FIREBASE_URL}/${uid}.json?auth=${token}&uid=${uid}`, formData)
+    axios.put(`${process.env.REACT_APP_FIREBASE_URL}/${uid}/${currentCentral}/Central_Info.json?auth=${token}&uid=${uid}`, formData)
     .then(response => {
       console.log(response.data);
     })
