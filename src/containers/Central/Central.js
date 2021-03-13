@@ -62,7 +62,8 @@ class Central extends Component {
 const mapStateToProps = state => {
   return {
     userId: state.userId,
-    token: state.token
+    token: state.token,
+    currentCentral: state.currentCentral
   }
 }
 

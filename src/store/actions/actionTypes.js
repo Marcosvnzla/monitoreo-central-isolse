@@ -11,3 +11,4 @@ export const LOGOUT = 'LOGOUT';
 export const TOKEN_REFRESH = 'TOKEN_REFRESH';
 
 export const LOAD_CENTRALES = 'LOAD_CENTRALES';
+export const SET_CURRENT_CENTRAL = 'SET_CURRENT_CENTRAL';

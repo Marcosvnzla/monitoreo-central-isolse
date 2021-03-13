@@ -7,7 +7,8 @@ const initialState = {
   isLoggedIn: false,
   loading: false,
   errorMessage: '',
-  centrales: null
+  centrales: null,
+  currentCentral: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -54,6 +55,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         centrales: action.centrales
+      }
+    
+    case actionTypes.SET_CURRENT_CENTRAL:
+      return {
+        ...state,
+        currentCentral: action.clickedCentral
       }
 
     default:

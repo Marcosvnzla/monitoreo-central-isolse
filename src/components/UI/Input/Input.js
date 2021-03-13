@@ -6,7 +6,7 @@ const input = (props) => {
   return(
     <div className={styles.Input}>
       <label htmlFor={props.name} className={styles.Label}>{props.label}</label>
-      <Field {...props} className={styles.InputElement} /> 
+      <Field className={styles.InputElement} {...props} /> 
       <ErrorMessage name={props.name} component='div' className={styles.errorMessage} />
     </div>
   );

@@ -8,43 +8,48 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 
 const formSchema = Yup.object().shape({
+  nombre: Yup.string(),
+  brand: Yup.string(),
+  devices: Yup.string(),
+  model: Yup.string(),
+  location: Yup.string()
 });
 
 class CentralDataLoader extends Component {
 
   state = {
     formData: {
-      nombre: {
-        type: 'input',
-        name: 'nombre',
+      name: {
         value: '',
+        name: 'name',
+        type: 'input',
         placeholder: 'Nombre de las instalaciones',
         label: 'Nombre'
       },
       brand: {
         value: '',
-        name: 'marca',
+        name: 'brand',
         type: 'input',
         placeholder: 'Marca',
         label: 'Marca'
       },
       devices: {
         value: '',
-        name: 'dispositivos',
+        name: 'devices',
         type: 'number',
         placeholder: 'Número de dispositivos',
         label: 'Cantidad'
       },
       model: {
         value: '',
-        name: 'Modelo',
+        name: 'model',
         type: 'input',
         placeholder: 'Modelo',
         label: 'Modelo'
       },
       location: {
         value: '',
-        name: 'dirección',
+        name: 'location',
         type: 'input',
         placeholder: 'Dirección completa',
         label: 'Dirección'
@@ -53,8 +58,7 @@ class CentralDataLoader extends Component {
   }
 
   loadFormData = (values) => {
-    console.log(values);
-    this.props.onLoad(this.props.token, this.props.uid, values);
+    this.props.onLoad(this.props.token, this.props.uid, values, this.props.currentCentral);
   }
   
   render () {
@@ -67,6 +71,7 @@ class CentralDataLoader extends Component {
       });
 
       initialValues[key] = this.state.formData[key].value;
+      console.log(initialValues);
     }
 
     const formElementsList = formArray.map(formElement => {
@@ -82,11 +87,12 @@ class CentralDataLoader extends Component {
     return (
       <Formik 
               onSubmit={values => this.loadFormData(values)}
+              validationSchema={formSchema}
               initialValues={initialValues}
                >
         <Form className={styles.CentralDataLoader}>
           {formElementsList}
-          <Button btnType="Success">Ingresar</Button>
+          <Button typeOfButton="submit" btnType="Success">Ingresar</Button>
         </Form>
       </Formik>
     );
@@ -96,13 +102,14 @@ class CentralDataLoader extends Component {
 const mapStateToProps = state => {
   return {
     token: state.token,
-    uid: state.userId
+    uid: state.userId,
+    currentCentral: state.currentCentral
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoad: (token, uid, formData) => dispatch(actions.loadInit(token, uid, formData))
+    onLoad: (token, uid, formData, currentCentral) => dispatch(actions.loadInit(token, uid, formData, currentCentral))
   }
 }
 
