@@ -7,8 +7,7 @@ import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
 class Layout extends Component {
   state = {
-    showDrawer: false,
-    showCentralesMenu: false
+    showDrawer: false
   }
 
   showDrawer = () => {
@@ -17,19 +16,12 @@ class Layout extends Component {
     });
   }
 
-  showCentralesMenu = () => {
-    this.setState(prevState => {
-      return {showCentralesMenu: !prevState.showCentralesMenu}
-    });
-    console.log('centrales menu clicked');
-  }
-
   render () {
     return (
       <div className={styles.Layout}>
         <Backdrop show={this.state.showDrawer} clicked={this.showDrawer} />
         <SideDrawer navClicked={this.showDrawer} bstate={this.state.showDrawer} />
-        {this.props.isAuthenticated ? <Sidebar logoClicked={this.showDrawer} centralesClicked={this.showCentralesMenu} centralesMenuState={this.state.showCentralesMenu} centrales={this.props.centrales} /> : null}
+        {this.props.isAuthenticated ? <Sidebar logoClicked={this.showDrawer} /> : null}
         {this.props.children}
       </div>
     );
@@ -38,8 +30,7 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.token !== null,
-    centrales: state.centrales
+    isAuthenticated: state.token !== null
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { connect, shallowEqual } from 'react-redux';
 import firebase from '../../Firebase';
 import styles from './Central.module.css';
 import MessageLogger from './MessageLogger/MessageLogger';
@@ -14,16 +14,26 @@ class Central extends Component {
   }
 
   componentDidMount () {
-    const abnormalDevices = firebase.database().ref(`${this.props.userId}/CABA/Abnormal_Devices`); // CABA provisorio, cambiar por ${this.props.currentCentral}
+    this.props.onGetCentrales(this.props.userId);
+    this.setFirebaseReference();
+  }
+
+  componentDidUpdate (prevProps) {
+    if (!shallowEqual(this.props.currentCentral, prevProps.currentCentral)) {
+      this.setFirebaseReference();
+    }
+  }
+
+  setFirebaseReference = () => {
+    const abnormalDevices = firebase.database().ref(`${this.props.userId}/${this.props.currentCentral}/Abnormal_Devices`);
     abnormalDevices.on('value', (snapshot) => {
       const data = snapshot.val();
       this.setState({abnormalDevices: data})
     }, error => {console.log(error)});
-
-    this.props.onGetCentrales(this.props.userId);
   }
 
   render () {
+
     const abnormalDevicesArray = [];
     let abnormalDevicesList = [];
     if (this.state.abnormalDevices !== null) {

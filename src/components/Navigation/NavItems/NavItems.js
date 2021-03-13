@@ -7,7 +7,7 @@ const navItems = (props) => {
   return (
     <ul className={styles.NavItems} style={props.moreStyles}>
       <NavItem clicked={props.clicked} link="/">Central</NavItem>
-      <CentralesMenu centrales={props.centrales} clicked={props.centralesClicked} menuState={props.centralesMenuState} />
+      <CentralesMenu />
       <NavItem clicked={props.clicked} link="/dataLoader">Cargar Datos</NavItem>
       <NavItem clicked={props.clicked} link="/logout">Salir</NavItem>
     </ul>

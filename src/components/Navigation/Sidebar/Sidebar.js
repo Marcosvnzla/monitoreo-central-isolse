@@ -9,7 +9,7 @@ const toolbar = (props) => {
       <div className={styles.ImageContainer} onClick={props.logoClicked}>
         <img src={smallLogo}/>
       </div>
-      <NavItems centrales={props.centrales} centralesClicked={props.centralesClicked} centralesMenuState={props.centralesMenuState} />
+      <NavItems />
     </nav>
   );
 }
