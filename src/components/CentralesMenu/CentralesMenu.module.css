@@ -5,6 +5,7 @@
   width: 100%;
   font-size: 20px;
   text-align: center;
+  cursor: pointer;
 }
 
 .NavigationItem div {
@@ -21,7 +22,29 @@
   background-color: #0000007c;
 }
 
+.Menu {
+  display: none;
+  padding: 0;
+  background-color: #00000046;
+  list-style: none;
+}
+
+.MenuItem {
+  font-size: 16px;
+  color: #F98D33;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.MenuItem:hover {
+  font-weight: bold;
+}
+
 .active {
   background-color: #0000007c;
   font-weight: bold;
+}
+
+.show {
+  display: block;
 }

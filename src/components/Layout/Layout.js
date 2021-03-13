@@ -7,14 +7,21 @@ import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
 class Layout extends Component {
   state = {
-    showDrawer: false
+    showDrawer: false,
+    showCentralesMenu: false
   }
 
   showDrawer = () => {
     this.setState(prevState => {
       return {showDrawer: !prevState.showDrawer}
     });
-    console.log('clicked logo');
+  }
+
+  showCentralesMenu = () => {
+    this.setState(prevState => {
+      return {showCentralesMenu: !prevState.showCentralesMenu}
+    });
+    console.log('centrales menu clicked');
   }
 
   render () {
@@ -22,7 +29,7 @@ class Layout extends Component {
       <div className={styles.Layout}>
         <Backdrop show={this.state.showDrawer} clicked={this.showDrawer} />
         <SideDrawer navClicked={this.showDrawer} bstate={this.state.showDrawer} />
-        {this.props.isAuthenticated ? <Sidebar logoClicked={this.showDrawer} centrales={this.props.centrales} /> : null}
+        {this.props.isAuthenticated ? <Sidebar logoClicked={this.showDrawer} centralesClicked={this.showCentralesMenu} centralesMenuState={this.state.showCentralesMenu} centrales={this.props.centrales} /> : null}
         {this.props.children}
       </div>
     );
