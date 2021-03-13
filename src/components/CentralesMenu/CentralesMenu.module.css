@@ -1,0 +1,27 @@
+.NavigationItem {
+  box-sizing: border-box;
+  margin: 10px 0;
+  display: block;
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+}
+
+.NavigationItem div {
+  box-sizing: border-box;
+  display: block;
+  color: #F98D33;
+  text-decoration: none;
+  font-family: inherit;
+  padding: 12px 0;
+}
+
+.NavigationItem div:hover, .NavigationItem div:active, .NavigationItem div.active {
+  color: #F98D33;
+  background-color: #0000007c;
+}
+
+.active {
+  background-color: #0000007c;
+  font-weight: bold;
+}

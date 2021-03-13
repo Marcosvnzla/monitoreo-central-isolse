@@ -22,7 +22,7 @@ class Layout extends Component {
       <div className={styles.Layout}>
         <Backdrop show={this.state.showDrawer} clicked={this.showDrawer} />
         <SideDrawer navClicked={this.showDrawer} bstate={this.state.showDrawer} />
-        {this.props.isAuthenticated ? <Sidebar logoClicked={this.showDrawer}/> : null}
+        {this.props.isAuthenticated ? <Sidebar logoClicked={this.showDrawer} centrales={this.props.centrales} /> : null}
         {this.props.children}
       </div>
     );
@@ -31,7 +31,8 @@ class Layout extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.token !== null
+    isAuthenticated: state.token !== null,
+    centrales: state.centrales
   }
 }
 
