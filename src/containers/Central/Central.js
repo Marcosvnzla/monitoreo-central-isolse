@@ -14,7 +14,7 @@ class Central extends Component {
   }
 
   componentDidMount () {
-    this.props.onGetCentrales(this.props.userId);
+    this.props.onGetCentrales(this.props.userId, this.props.token);
     this.setFirebaseReference();
   }
 
@@ -79,7 +79,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetCentrales: (uid) => dispatch(actions.getCentrales(uid))
+    onGetCentrales: (uid, token) => dispatch(actions.getCentrales(uid, token))
   }
 }
 

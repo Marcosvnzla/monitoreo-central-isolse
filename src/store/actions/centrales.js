@@ -15,9 +15,9 @@ export const setCurrentCentral = (clickedCentral) => {
   }
 }
 
-export const getCentrales = (uid) => {
+export const getCentrales = (uid, token) => {
   return dispatch => {
-    axios.get(`${process.env.REACT_APP_FIREBASE_URL}/${uid}.json`)
+    axios.get(`${process.env.REACT_APP_FIREBASE_URL}/${uid}.json?auth=${token}&uid=${uid}`)
     .then(response => {
       console.log(response.data);
       const centrales = Object.keys(response.data);
