@@ -35,7 +35,6 @@ export const logout = () => {
 
 const checkAuthTimeout = (tokenExpirationTime, refreshToken) => {
   return dispatch => {
-    console.log(tokenExpirationTime);
     setTimeout(() => {
       dispatch(initTokenRefresh(refreshToken));
     }, tokenExpirationTime * 1000);

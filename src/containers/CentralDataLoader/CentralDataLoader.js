@@ -71,7 +71,6 @@ class CentralDataLoader extends Component {
       });
 
       initialValues[key] = this.state.formData[key].value;
-      console.log(initialValues);
     }
 
     const formElementsList = formArray.map(formElement => {

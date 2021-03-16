@@ -54,7 +54,6 @@ class Central extends Component {
         );
       });
     }
-    console.log(abnormalDevicesList);
 
     return (
         <div className={styles.Central}>
