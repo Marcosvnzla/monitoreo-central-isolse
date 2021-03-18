@@ -48,3 +48,14 @@
 .show {
   display: block;
 }
+
+@media (min-width: 480px) and (max-width: 768px) {
+  .Menu {
+    position: absolute;
+    top: 70px;
+    border-radius: 10px;
+    background-color: #383838;
+    padding-bottom: 8px;
+    width: 25%;
+  }
+}
