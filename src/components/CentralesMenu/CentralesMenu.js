@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../../store/actions/index';
 import styles from './CentralesMenu.module.css';
 import Spinner from '../UI/Spinner/Spinner';
+import Backdrop from '../UI/Backdrop/Backdrop';
+import * as actions from '../../store/actions/index';
 
 class CentralesMenu extends Component {
   state = {
@@ -13,11 +14,11 @@ class CentralesMenu extends Component {
     this.setState(prevState => {
       return {showCentralesMenu: !prevState.showCentralesMenu}
     });
+    console.log(this.state.showCentralesMenu);
   }
 
   setCurrentCentral = (clickedCentral) => {
     this.props.onSetCurrentCentral(clickedCentral);
-
   }
 
   render () {
@@ -35,12 +36,15 @@ class CentralesMenu extends Component {
     }
 
     return (
-      <li className={styles.NavigationItem} onClick={this.showCentralesMenu}>
-        <div>Centrales</div>
-        <ul className={classes.join(' ')}>
-          {this.props.centrales ? centrales : <Spinner />}
-        </ul>
-      </li>
+      <Fragment>
+        <Backdrop show={this.state.showCentralesMenu} invisible clicked={this.showCentralesMenu} />
+        <li className={styles.NavigationItem} onClick={this.showCentralesMenu}>
+          <div>Centrales</div>
+          <ul className={classes.join(' ')}>
+            {this.props.centrales ? centrales : <Spinner />}
+          </ul>
+        </li>
+      </Fragment>
     );
   }
 }

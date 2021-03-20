@@ -10,8 +10,15 @@
   height: 100vh;
 }
 
+.title {
+  font-family: 'Montserrat';
+  margin-left: 16px;
+  color: #383838;
+}
+
 .display {
   margin: 0 auto;
+  padding-top: 40px;
   width: 90%;
   height: 80vh;
   background-color: #BF2222;
@@ -24,7 +31,6 @@
   max-height: 80%;
   background-color: white;
   margin: 0 auto;
-  margin-top: 96px;
   border-radius: 10px;
   border: 6px solid black;
 }
@@ -32,6 +38,10 @@
 @media (max-width: 768px) {
   .Central {
     margin-top: 64px;
+    height: calc(100vh - 64px);
+  }
+
+  .container {
     height: calc(100vh - 64px);
   }
 }

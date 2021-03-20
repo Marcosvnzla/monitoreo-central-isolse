@@ -19,11 +19,11 @@
 }
 
 .NavigationItem div:hover, .NavigationItem div:active, .NavigationItem div.active {
-  color: #F98D33;
   background-color: #0000002f;
 }
 
 .Menu {
+  z-index: 400;
   padding: 20px;
   padding-top: 0;
   list-style: none;

@@ -58,7 +58,7 @@ class Central extends Component {
     return (
         <div className={styles.Central}>
           <div className={styles.container}>
-            <h1 className={styles.Title}>Actualmente en {this.props.currentCentral}</h1>
+            <h1 className={styles.title}>Actualmente en {this.props.currentCentral}</h1>
             <div className={styles.display}>
               <div className={styles.messageContainer}>
                 {abnormalDevicesList[0] ? abnormalDevicesList[0] : <Spinner/>}

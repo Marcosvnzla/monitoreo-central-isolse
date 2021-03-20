@@ -1,4 +1,4 @@
-import React, { Component} from 'react';
+import React, { Component, Fragment} from 'react';
 import { connect } from 'react-redux';
 import styles from './Layout.module.css';
 import Sidebar from '../Navigation/Sidebar/Sidebar';
@@ -18,12 +18,14 @@ class Layout extends Component {
 
   render () {
     return (
-      <div className={styles.Layout}>
+      <Fragment>
         <Backdrop show={this.state.showDrawer} clicked={this.showDrawer} />
+      <div className={styles.Layout}>
         <SideDrawer navClicked={this.showDrawer} bstate={this.state.showDrawer} />
         {this.props.isAuthenticated ? <Sidebar logoClicked={this.showDrawer} /> : null}
         {this.props.children}
       </div>
+      </Fragment>
     );
   }
 }
