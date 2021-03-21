@@ -148,6 +148,12 @@
   border: 6px solid black;
 }
 
+@media (min-width: 1114px) {
+  .display {
+    width: 728px;
+  }
+}
+
 @media (max-width: 768px) {
   .Central {
     margin-top: 64px;
