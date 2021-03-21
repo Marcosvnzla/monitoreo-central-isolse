@@ -17,15 +17,128 @@
 }
 
 .display {
+  position: relative;
   margin: 0 auto;
-  padding-top: 40px;
+  padding-top: 128px;
   width: 90%;
   height: 80vh;
-  background-color: #BF2222;
+  background: radial-gradient(86.44% 48% at 50.13% 39.2%, #F10D0D 0%, #BF2222 89.55%);
   border-radius: 8px;
+  box-shadow: 0 4px 12px 2px rgba(0,0,0,0.2);
+}
+
+.ventilacionImg {
+  position: absolute;
+  left: 15%;
+  bottom: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 70%;
+  min-height: 40px;
+}
+
+.ventilacionImg2 {
+  position: absolute;
+  left: 15%;
+  top: 20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 70%;
+  min-height: 40px;
+}
+
+.lockImg {
+  position: absolute;
+  right: -40px;
+  bottom: -64px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 40px;
+  height: 40px;
+}
+
+.boltImg {
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 12px;
+  height: 12px;
+}
+
+.boltImg2 {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 12px;
+  height: 12px;
+}
+
+.boltImg3 {
+  position: absolute;
+  bottom: -38px;
+  right: 48%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 12px;
+  height: 12px;
+}
+
+.boltImg4 {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 12px;
+  height: 12px;
+}
+
+.boltImg5 {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 12px;
+  height: 12px;
+}
+
+.boltImg6 {
+  position: absolute;
+  top: -38px;
+  right: 48%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 12px;
+  height: 12px;
+}
+
+.boltImg7 {
+  position: absolute;
+  right: 8px;
+  bottom: -52px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 12px;
+  height: 12px;
+}
+
+.boltImg8 {
+  position: absolute;
+  top: -102px;
+  left: -16px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 12px;
+  height: 12px;
 }
 
 .display .messageContainer {
+  position: relative;
   width: 80%;
   min-height: 50%;
   max-height: 80%;
@@ -44,6 +157,18 @@
   .container {
     height: calc(100vh - 64px);
   }
+
+  .display {
+    height: 60vh;
+  }
+
+  .ventilacionImg {
+    min-height: 32px;
+  }
+  
+  .ventilacionImg2 {
+    min-height: 32px;
+  }
 }
  
 @media (max-width: 480px) {
@@ -55,11 +180,104 @@
   .display {
     margin: 8px auto;
     width: 95%;
+    padding-bottom: 16px;
   }
 
-  .display div {
-    margin-top: 48px;
-    min-height: 70%;
-    width: 90%;
+  .ventilacionImg {
+    min-height: 28px;
+  }
+  
+  .ventilacionImg2 {
+    min-height: 28px;
+  }
+
+  .lockImg {
+    position: absolute;
+    right: -40px;
+    bottom: -64px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 32px;
+    height: 32px;
+  }
+
+  .boltImg {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 8px;
+    height: 8px;
+  }
+
+  .boltImg2 {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 8px;
+    height: 8px;
+  }
+
+  .boltImg3 {
+    position: absolute;
+    bottom: -38px;
+    right: 48%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 8px;
+    height: 8px;
+  }
+
+  .boltImg4 {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 8px;
+    height: 8px;
+  }
+
+  .boltImg5 {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 8px;
+    height: 8px;
+  }
+
+  .boltImg6 {
+    position: absolute;
+    top: -38px;
+    right: 48%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 8px;
+    height: 8px;
+  }
+
+  .boltImg7 {
+    position: absolute;
+    right: 0px;
+    bottom: -52px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 8px;
+    height: 8px;
+  }
+
+  .boltImg8 {
+    position: absolute;
+    top: -102px;
+    left: -16px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 8px;
+    height: 8px;
   }
 }
