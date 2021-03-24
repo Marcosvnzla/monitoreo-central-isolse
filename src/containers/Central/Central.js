@@ -4,6 +4,7 @@ import firebase from '../../Firebase';
 import styles from './Central.module.css';
 import MessageLogger from './MessageLogger/MessageLogger';
 import Message from './Message/Message';
+import MessageCard from './MessageCard/MessageCard';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import ventilacionImg from '../../assets/images/ventilacion_central.svg';
 import lockImg from '../../assets/images/central_lock.svg';
@@ -13,7 +14,8 @@ import * as actions from '../../store/actions/index';
 class Central extends Component {
   state = {
     deviceInfo: '',
-    abnormalDevices: null
+    abnormalDevices: null,
+    messageIndex: 0
   }
 
   componentDidMount () {
@@ -35,6 +37,28 @@ class Central extends Component {
     }, error => {console.log(error)});
   }
 
+  setDisplayMessage = (e) => {
+    const messageIndex = e.currentTarget.getAttribute('indexkey');
+    console.log(e.currentTarget.getAttribute('indexkey'));
+    console.log(this.state.abnormalDevices[messageIndex]);
+
+    this.setState({messageIndex: messageIndex});
+  }
+
+  createMessageForDisplay = (messageIndex) => {
+    const device = this.state.abnormalDevices[messageIndex];
+
+    return (
+      <Message type={device.type}
+                status={device.status}
+                date={device.date}
+                id={device.id}
+                name={device.name}
+                fuego={device.status}
+                />
+    );
+  }
+
   render () {
 
     const abnormalDevicesArray = [];
@@ -46,13 +70,15 @@ class Central extends Component {
 
       abnormalDevicesList = abnormalDevicesArray.map((device, index) => {
         return (
-          <Message type={device.type}
+          <MessageCard type={device.type}
                    status={device.status}
                    position={`${index + 1} de ${abnormalDevicesArray.length}`}
                    date={device.date}
                    id={device.id}
                    name={device.name}
                    fuego={device.status}
+                   clicked={this.setDisplayMessage.bind(this)}
+                   indexkey={index}
                    key={index} />
         );
       });
@@ -64,7 +90,7 @@ class Central extends Component {
             <h1 className={styles.title}>Central seleccionada: {this.props.currentCentral.toUpperCase()}</h1>
             <div className={styles.display}>
               <div className={styles.messageContainer}>
-                {abnormalDevicesList[0] ? abnormalDevicesList[0] : <Spinner/>}
+                {abnormalDevicesList[0] ? this.createMessageForDisplay(this.state.messageIndex) : <Spinner/>}
                 <div className={styles.lockImg} style={{backgroundImage: `url(${lockImg})`}}></div>
                 <div className={styles.boltImg} style={{backgroundImage: `url(${boltImg})`}}></div>
                 <div className={styles.boltImg2} style={{backgroundImage: `url(${boltImg})`}}></div>
