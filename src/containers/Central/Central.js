@@ -33,15 +33,18 @@ class Central extends Component {
     const abnormalDevices = firebase.database().ref(`${this.props.userId}/${this.props.currentCentral}/Abnormal_Devices`);
     abnormalDevices.on('value', (snapshot) => {
       const data = snapshot.val();
-      this.setState({abnormalDevices: data})
+      const devicesArray = [];
+      for (let key in data) {
+        for (const el of data[key]) {
+          devicesArray.push(el);
+        }
+      }
+      this.setState({abnormalDevices: devicesArray});
     }, error => {console.log(error)});
   }
 
   setDisplayMessage = (e) => {
     const messageIndex = e.currentTarget.getAttribute('indexkey');
-    console.log(e.currentTarget.getAttribute('indexkey'));
-    console.log(this.state.abnormalDevices[messageIndex]);
-
     this.setState({messageIndex: messageIndex});
   }
 
@@ -61,18 +64,14 @@ class Central extends Component {
 
   render () {
 
-    const abnormalDevicesArray = [];
     let abnormalDevicesList = [];
     if (this.state.abnormalDevices !== null) {
-      for (let key in this.state.abnormalDevices) {
-        abnormalDevicesArray.push(this.state.abnormalDevices[key]);
-      }
 
-      abnormalDevicesList = abnormalDevicesArray.map((device, index) => {
+      abnormalDevicesList = this.state.abnormalDevices.map((device, index) => {
         return (
           <MessageCard type={device.type}
                    status={device.status}
-                   position={`${index + 1} de ${abnormalDevicesArray.length}`}
+                   position={`${index + 1} de ${this.state.abnormalDevices.length}`}
                    date={device.date}
                    id={device.id}
                    name={device.name}
