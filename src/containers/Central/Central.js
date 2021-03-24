@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect, shallowEqual } from 'react-redux';
+import { DragDropContext } from 'react-beautiful-dnd';
 import firebase from '../../Firebase';
 import styles from './Central.module.css';
 import MessageLogger from './MessageLogger/MessageLogger';
@@ -62,6 +63,25 @@ class Central extends Component {
     );
   }
 
+  onDragEnd = (result) => {
+    const {destination, source} = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (destination.index === source.index) {
+      return;
+    }
+
+    const prevArray = JSON.parse(JSON.stringify(this.state.abnormalDevices));
+    prevArray.splice(source.index, 1);
+    prevArray.splice(destination.index, 0, this.state.abnormalDevices[source.index]);
+
+    this.setState({abnormalDevices: prevArray});
+    this.setState({messageIndex: prevArray.indexOf(prevArray[0])});
+  }
+
   render () {
 
     let abnormalDevicesList = [];
@@ -73,7 +93,7 @@ class Central extends Component {
                    status={device.status}
                    position={`${index + 1} de ${this.state.abnormalDevices.length}`}
                    date={device.date}
-                   id={device.id}
+                   deviceid={device.id}
                    name={device.name}
                    fuego={device.status}
                    clicked={this.setDisplayMessage.bind(this)}
@@ -84,6 +104,7 @@ class Central extends Component {
     }
 
     return (
+      <DragDropContext onDragEnd={this.onDragEnd}>
         <div className={styles.Central}>
           <div className={styles.container}>
             <h1 className={styles.title}>Central seleccionada: {this.props.currentCentral.toUpperCase()}</h1>
@@ -106,6 +127,8 @@ class Central extends Component {
           </div>
           <MessageLogger messageList={abnormalDevicesList}/>
         </div>
+
+      </DragDropContext>
     );
   }
 }

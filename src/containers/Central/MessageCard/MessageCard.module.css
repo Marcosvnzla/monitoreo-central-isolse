@@ -11,10 +11,6 @@
   text-align: center;
 }
 
-.MessageCard:hover {
-  cursor: pointer;
-}
-
 .MessageCard p {
   margin: 0 auto;
   padding: 0;
