@@ -5,7 +5,7 @@ const message = (props) => {
   const messageClasses = [styles.Message]
   const statBarClasses = [styles.statusBar]
 
-  if (props.fuego === 'FUEGO') {
+  if (props.fuego === 'FUEGO' || props.fuego === 'ALARMA') {
     messageClasses.push(styles.fuegoMessage);
     statBarClasses.push(styles.fuegoBar);
   }

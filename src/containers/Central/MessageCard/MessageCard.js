@@ -7,7 +7,7 @@ import styles from './MessageCard.module.css';
 
 const messageLogger = (props) => {
   const classes = [styles.MessageCard]
-  if (props.fuego === 'FUEGO') {
+  if (props.fuego === 'FUEGO' || props.fuego === 'ALARMA') {
     classes.push(styles.Alarma);
   }
 
@@ -15,7 +15,7 @@ const messageLogger = (props) => {
     <Draggable draggableId={`draggable-${props.indexkey}`} index={props.indexkey}>
       {(provided) => {
         const inlineStyle = {
-          backgroundImage: `url(${props.fuego === 'FUEGO' ? alarmaBgImg : problemaBgImg})`,
+          backgroundImage: `url(${props.fuego === 'FUEGO' || props.fuego === 'ALARMA' ? alarmaBgImg : problemaBgImg})`,
           ...provided.draggableProps.style
         }
 
@@ -28,7 +28,7 @@ const messageLogger = (props) => {
               indexkey={props.indexkey}
               style={inlineStyle}>
 
-            {props.fuego === 'FUEGO' ? <img className={styles.flame} src={flameImg} /> : null}
+            {props.fuego === 'FUEGO' || props.fuego === 'ALARMA' ? <img className={styles.flame} src={flameImg} /> : null}
             <p>{props.deviceid}</p>
             <div className={styles.counter}>
               <p>{props.position}</p>

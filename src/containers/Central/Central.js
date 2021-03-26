@@ -20,7 +20,10 @@ class Central extends Component {
   }
 
   componentDidMount () {
-    this.props.onGetCentrales(this.props.userId, this.props.token);
+    if (this.props.userId && this.props.token) {
+      this.props.onGetCentrales(this.props.userId, this.props.token);
+    }
+
     this.setFirebaseReference();
   }
 
@@ -51,6 +54,10 @@ class Central extends Component {
 
   createMessageForDisplay = (messageIndex) => {
     const device = this.state.abnormalDevices[messageIndex];
+
+    if (!device) {
+      return <p>Seleccione un mensaje para mostrar</p>;
+    }
 
     return (
       <Message type={device.type}
@@ -110,7 +117,7 @@ class Central extends Component {
             <h1 className={styles.title}>Central seleccionada: {this.props.currentCentral.toUpperCase()}</h1>
             <div className={styles.display}>
               <div className={styles.messageContainer}>
-                {abnormalDevicesList[0] ? this.createMessageForDisplay(this.state.messageIndex) : <Spinner/>}
+                {this.state.abnormalDevices ? this.createMessageForDisplay(this.state.messageIndex) : <Spinner />}
                 <div className={styles.lockImg} style={{backgroundImage: `url(${lockImg})`}}></div>
                 <div className={styles.boltImg} style={{backgroundImage: `url(${boltImg})`}}></div>
                 <div className={styles.boltImg2} style={{backgroundImage: `url(${boltImg})`}}></div>
