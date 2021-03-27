@@ -42,12 +42,39 @@
   right: -20px;
   margin: 0;
   padding: 0;
+  animation-duration: 0.2s;
+  animation-name: sideToSide;
+  animation-iteration-count: infinite;
+  animation-direction: alternate-reverse;
+  animation-timing-function: cubic-bezier(0.75,-0.04, 0.29, 1.01);
+  transform-origin: 50% 75%;
 }
 
 .Alarma {
   color: #E7E7E7;
+  animation: colorLetterChange 1s linear 1s infinite;
 }
 
 .Alarma .counter {
   background-color: #FD3232;
+}
+
+@keyframes sideToSide {
+  from {
+    transform: rotateZ(-10deg);
+  }
+
+  to {
+    transform: rotateZ(10deg);
+  }
+}
+
+@keyframes colorLetterChange {
+  from {
+    color: red;
+  }
+
+  to {
+    color: #E7E7E7;
+  }
 }

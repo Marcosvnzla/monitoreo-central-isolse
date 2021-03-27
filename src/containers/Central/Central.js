@@ -20,10 +20,7 @@ class Central extends Component {
   }
 
   componentDidMount () {
-    if (this.props.userId && this.props.token) {
-      this.props.onGetCentrales(this.props.userId, this.props.token);
-    }
-
+    this.props.onGetCentrales(this.props.userId, this.props.token);
     this.setFirebaseReference();
   }
 
@@ -44,6 +41,7 @@ class Central extends Component {
         }
       }
       this.setState({abnormalDevices: devicesArray});
+      this.setAlarmMessageFirst(devicesArray);
     }, error => {console.log(error)});
   }
 
@@ -68,6 +66,21 @@ class Central extends Component {
                 fuego={device.status}
                 />
     );
+  }
+
+  setAlarmMessageFirst = (abnormalDevices) => {
+    const prevMessages = [...abnormalDevices];
+    for (const el of prevMessages) {
+      if (!el) {
+        return;
+      }
+
+      if (el.status === 'ALARMA' || el.status === 'FUEGO') {
+        prevMessages.splice(prevMessages.indexOf(el), 1);
+        prevMessages.splice(0, 0, el);
+      }
+    }
+    this.setState({abnormalDevices: prevMessages});
   }
 
   onDragEnd = (result) => {
