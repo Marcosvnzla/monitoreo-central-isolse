@@ -7,6 +7,9 @@ import MessageLogger from './MessageLogger/MessageLogger';
 import Message from './Message/Message';
 import MessageCard from './MessageCard/MessageCard';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import ImageContainer from '../../components/ImageContainer/ImageContainer';
+import bigLogoImg from '../../assets/images/bigLogo_img.png';
+import noEventsImg from '../../assets/images/no_events_bg_img.svg';
 import ventilacionImg from '../../assets/images/ventilacion_central.svg';
 import lockImg from '../../assets/images/central_lock.svg';
 import boltImg from '../../assets/images/central_bolt.svg';
@@ -51,10 +54,18 @@ class Central extends Component {
   }
 
   createMessageForDisplay = (messageIndex) => {
+    console.log(this.state.abnormalDevices.length);
     const device = this.state.abnormalDevices[messageIndex];
 
-    if (!device) {
-      return <p>Seleccione un mensaje para mostrar</p>;
+    if (!device && (this.state.abnormalDevices.length !== 0)) {
+      return (<p>Seleccione un mensaje para mostrar</p>);
+    } else if (this.state.abnormalDevices.length === 0) {
+      return (
+        <div className={styles.noEvents} style={{backgroundImage: `url(${noEventsImg})`}}>
+          <img src={bigLogoImg} />
+          <h2>Sistema Normal</h2>
+        </div>
+      );
     }
 
     return (
@@ -130,7 +141,7 @@ class Central extends Component {
             <h1 className={styles.title}>Central seleccionada: {this.props.currentCentral.toUpperCase()}</h1>
             <div className={styles.display}>
               <div className={styles.messageContainer}>
-                {this.state.abnormalDevices ? this.createMessageForDisplay(this.state.messageIndex) : <Spinner />}
+                {this.state.abnormalDevices ? this.createMessageForDisplay(this.state.messageIndex) : <Spinner/>}
                 <div className={styles.lockImg} style={{backgroundImage: `url(${lockImg})`}}></div>
                 <div className={styles.boltImg} style={{backgroundImage: `url(${boltImg})`}}></div>
                 <div className={styles.boltImg2} style={{backgroundImage: `url(${boltImg})`}}></div>
