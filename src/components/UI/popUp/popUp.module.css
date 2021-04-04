@@ -1,0 +1,39 @@
+.popUp {
+  position: absolute;
+  opacity: 0;
+  right: calc(50% - 90px);
+  bottom: 20%;
+  padding: 16px;
+  width: 180px;
+  text-align: center;
+  border-radius: 8px;
+  z-index: 4000;
+  font-family: 'Lato';
+  font-weight: bold;
+  background-color: rgb(211, 252, 255);
+  color: rgb(41, 32, 22);
+  animation-duration: 2s;
+  animation-name: animation;
+}
+
+@keyframes animation {
+  0% {
+    bottom: 0;
+    opacity: 0;
+  }
+
+  40% {
+    bottom: 20%;
+    opacity: 1;
+  }
+
+  75% {
+    bottom: 20%;
+    opacity: 1;
+  }
+
+  100% {
+    bottom: 20%;
+    opacity: 0;
+  }
+}

@@ -12,3 +12,6 @@ export const TOKEN_REFRESH = 'TOKEN_REFRESH';
 
 export const LOAD_CENTRALES = 'LOAD_CENTRALES';
 export const SET_CURRENT_CENTRAL = 'SET_CURRENT_CENTRAL';
+
+export const POPUP_START = 'POPUP_START';
+export const POPUP_END = 'POPUP_END';

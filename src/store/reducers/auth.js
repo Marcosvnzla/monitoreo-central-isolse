@@ -8,7 +8,8 @@ const initialState = {
   loading: false,
   errorMessage: '',
   centrales: null,
-  currentCentral: ''
+  currentCentral: '',
+  popUpMessages: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -61,6 +62,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentCentral: action.clickedCentral
+      }
+
+    case actionTypes.POPUP_START:
+      return {
+        ...state,
+        popUpMessages: [action.message]
+      }
+
+    case actionTypes.POPUP_END:
+      return {
+        ...state,
+        popUpMessages: []
       }
 
     default:

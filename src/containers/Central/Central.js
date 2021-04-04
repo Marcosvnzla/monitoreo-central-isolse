@@ -7,7 +7,7 @@ import MessageLogger from './MessageLogger/MessageLogger';
 import Message from './Message/Message';
 import MessageCard from './MessageCard/MessageCard';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import ImageContainer from '../../components/ImageContainer/ImageContainer';
+import PopUp from '../../components/UI/popUp/popUp';
 import bigLogoImg from '../../assets/images/bigLogo_img.png';
 import noEventsImg from '../../assets/images/no_events_bg_img.svg';
 import ventilacionImg from '../../assets/images/ventilacion_central.svg';
@@ -19,7 +19,8 @@ class Central extends Component {
   state = {
     deviceInfo: '',
     abnormalDevices: null,
-    messageIndex: 0
+    messageIndex: 0,
+    popUpMessages: []
   }
 
   componentDidMount () {
@@ -53,15 +54,25 @@ class Central extends Component {
     this.setState({messageIndex: messageIndex});
   }
 
+  showPopUp = (message) => {
+    const prevMessages = [...this.state.popUpMessages];
+    prevMessages.push(message);
+    this.setState({popUpMessages: prevMessages});
+    setTimeout(() => {
+      const newMessages = [...this.state.popUpMessages];
+      newMessages.splice(-1, 1);
+      this.setState({popUpMessages: prevMessages});
+    }, 2000);
+  }
+
   createMessageForDisplay = (messageIndex) => {
-    console.log(this.state.abnormalDevices.length);
     const device = this.state.abnormalDevices[messageIndex];
 
     if (!device && (this.state.abnormalDevices.length !== 0)) {
       return (<p>Seleccione un mensaje para mostrar</p>);
     } else if (this.state.abnormalDevices.length === 0) {
       return (
-        <div className={styles.noEvents} style={{backgroundImage: `url(${noEventsImg})`}}>
+        <div className={styles.noEvents} style={{backgroundImage: `url(${noEventsImg})`}} onClick={this.showPopUp}>
           <img src={bigLogoImg} />
           <h2>Sistema Normal</h2>
         </div>
@@ -134,9 +145,19 @@ class Central extends Component {
       });
     }
 
+    let popUpMessages = [];
+    if (this.state.popUpMessages !== null) {
+      popUpMessages = this.state.popUpMessages.map((message, index) => {
+        return (
+          <PopUp key={index} message={message} />
+        );
+      });
+    }
+
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div className={styles.Central}>
+          {popUpMessages}
           <div className={styles.container}>
             <h1 className={styles.title}>Central seleccionada: {this.props.currentCentral.toUpperCase()}</h1>
             <div className={styles.display}>
@@ -158,7 +179,6 @@ class Central extends Component {
           </div>
           <MessageLogger messageList={abnormalDevicesList}/>
         </div>
-
       </DragDropContext>
     );
   }

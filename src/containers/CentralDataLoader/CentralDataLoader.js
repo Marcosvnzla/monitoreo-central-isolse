@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import styles from './CentralDataLoader.module.css';
 import * as actions from '../../store/actions/index';
+import PopUp from '../../components/UI/popUp/popUp';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 
@@ -83,6 +84,12 @@ class CentralDataLoader extends Component {
       );
     });
 
+    const popUpMessages = this.props.popUpMessages.map((message, index) => {
+      return (
+        <PopUp key={index} message={message} />
+      );
+    })
+
     return (
       <Formik 
               onSubmit={values => this.loadFormData(values)}
@@ -90,6 +97,8 @@ class CentralDataLoader extends Component {
               initialValues={initialValues}
                >
         <Form className={styles.CentralDataLoader}>
+          <h1 className={styles.title}>Cargar datos a: {this.props.currentCentral.toUpperCase()}</h1>
+          {popUpMessages} 
           {formElementsList}
           <Button typeOfButton="submit" btnType="Success">Ingresar</Button>
         </Form>
@@ -102,7 +111,8 @@ const mapStateToProps = state => {
   return {
     token: state.token,
     uid: state.userId,
-    currentCentral: state.currentCentral
+    currentCentral: state.currentCentral,
+    popUpMessages: state.popUpMessages
   }
 }
 

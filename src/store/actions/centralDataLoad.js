@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes';
+import * as actions from './index';
 import axios from 'axios';
 
 const loadStart = () => {
@@ -15,6 +16,7 @@ export const loadInit = (token,uid, formData, currentCentral) => {
     .then(response => {
       axios.get(`${process.env.REACT_APP_FIREBASE_URL}/${uid}/${currentCentral}/Enable.json?auth=${token}&uid=${uid}`)
       .then(response => {
+      dispatch(actions.popUpInit('Datos cargados con exito'));
         console.log('Making sure Enable exists');
         if (response.data === null) {
           console.log('Creating Enable');
@@ -27,6 +29,7 @@ export const loadInit = (token,uid, formData, currentCentral) => {
       })
     })
     .catch(e => {
+      dispatch(actions.popUpInit('Problema al cargar los datos, inténtelo más tarde'));
       console.log(e.response.data);
     })
   }
