@@ -59,6 +59,13 @@ class CentralDataLoader extends Component {
   }
 
   loadFormData = (values) => {
+    for (let key in values) {
+      if (!values[key]) {
+        this.props.onPopup('Complete todos los campos');
+        return;
+      }
+    }
+
     this.props.onLoad(this.props.token, this.props.uid, values, this.props.currentCentral);
   }
   
@@ -118,7 +125,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLoad: (token, uid, formData, currentCentral) => dispatch(actions.loadInit(token, uid, formData, currentCentral))
+    onLoad: (token, uid, formData, currentCentral) => dispatch(actions.loadInit(token, uid, formData, currentCentral)),
+    onPopup: (message) => dispatch(actions.popUpInit(message))
   }
 }
 

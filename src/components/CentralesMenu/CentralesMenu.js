@@ -14,7 +14,6 @@ class CentralesMenu extends Component {
     this.setState(prevState => {
       return {showCentralesMenu: !prevState.showCentralesMenu}
     });
-    console.log(this.state.showCentralesMenu);
   }
 
   setCurrentCentral = (clickedCentral) => {

@@ -54,17 +54,6 @@ class Central extends Component {
     this.setState({messageIndex: messageIndex});
   }
 
-  showPopUp = (message) => {
-    const prevMessages = [...this.state.popUpMessages];
-    prevMessages.push(message);
-    this.setState({popUpMessages: prevMessages});
-    setTimeout(() => {
-      const newMessages = [...this.state.popUpMessages];
-      newMessages.splice(-1, 1);
-      this.setState({popUpMessages: prevMessages});
-    }, 2000);
-  }
-
   createMessageForDisplay = (messageIndex) => {
     const device = this.state.abnormalDevices[messageIndex];
 
@@ -72,7 +61,7 @@ class Central extends Component {
       return (<p>Seleccione un mensaje para mostrar</p>);
     } else if (this.state.abnormalDevices.length === 0) {
       return (
-        <div className={styles.noEvents} style={{backgroundImage: `url(${noEventsImg})`}} onClick={this.showPopUp}>
+        <div className={styles.noEvents} style={{backgroundImage: `url(${noEventsImg})`}}>
           <img src={bigLogoImg} />
           <h2>Sistema Normal</h2>
         </div>
@@ -145,19 +134,9 @@ class Central extends Component {
       });
     }
 
-    let popUpMessages = [];
-    if (this.state.popUpMessages !== null) {
-      popUpMessages = this.state.popUpMessages.map((message, index) => {
-        return (
-          <PopUp key={index} message={message} />
-        );
-      });
-    }
-
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <div className={styles.Central}>
-          {popUpMessages}
           <div className={styles.container}>
             <h1 className={styles.title}>Central seleccionada: {this.props.currentCentral.toUpperCase()}</h1>
             <div className={styles.display}>
