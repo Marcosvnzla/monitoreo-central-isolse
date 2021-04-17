@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect, shallowEqual } from 'react-redux';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { motion } from 'framer-motion';
 import firebase from '../../Firebase';
 import styles from './Central.module.css';
 import MessageLogger from './MessageLogger/MessageLogger';
 import Message from './Message/Message';
 import MessageCard from './MessageCard/MessageCard';
 import Spinner from '../../components/UI/Spinner/Spinner';
-import PopUp from '../../components/UI/popUp/popUp';
 import bigLogoImg from '../../assets/images/bigLogo_img.png';
 import noEventsImg from '../../assets/images/no_events_bg_img.svg';
 import ventilacionImg from '../../assets/images/ventilacion_central.svg';
@@ -136,7 +136,12 @@ class Central extends Component {
 
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <div className={styles.Central}>
+        <motion.div 
+          className={styles.Central}
+          initial={{opacity: 0.5}}
+          animate={{opacity: 1, animationDuration: '2s'}}
+          exit={{opacity: 0.1}}
+        >
           <div className={styles.container}>
             <h1 className={styles.title}>Central seleccionada: {this.props.currentCentral.toUpperCase()}</h1>
             <div className={styles.display}>
@@ -157,7 +162,7 @@ class Central extends Component {
             </div>
           </div>
           <MessageLogger messageList={abnormalDevicesList}/>
-        </div>
+        </motion.div>
       </DragDropContext>
     );
   }

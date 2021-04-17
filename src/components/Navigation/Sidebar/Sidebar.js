@@ -1,6 +1,8 @@
 import React from 'react';
 import NavItems from '../NavItems/NavItems';
+import { motion } from 'framer-motion';
 import styles from './Sidebar.module.css';
+
 import smallLogo from '../../../assets/images/small_logo.png';
 
 const toolbar = (props) => {

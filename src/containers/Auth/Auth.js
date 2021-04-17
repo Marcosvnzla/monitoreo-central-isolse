@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { motion } from 'framer-motion';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import styles from './Auth.module.css';
@@ -85,7 +86,12 @@ class Auth extends Component {
     }
 
     return (
-      <div className={styles.Auth}>
+      <motion.div 
+        className={styles.Auth}
+        initial={{opacity: 1}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+      >
         <Formik 
                 validationSchema={formSchema}
                 onSubmit={values => this.login(values)}
@@ -104,7 +110,7 @@ class Auth extends Component {
           <h1>Extra</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eleifend non libero non cursus. Vivamus eu lectus interdum, maximus eros a, tincidunt elit. Etiam turpis magna, mollis sit amet tortor ut, ultricies ornare magna.</p>
         </div>
-      </div>
+      </motion.div>
     );
   }
 }

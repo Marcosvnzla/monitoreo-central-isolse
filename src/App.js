@@ -17,15 +17,16 @@ class App extends Component {
   render () {
     //non authorized routes
     let routes = (
-      <Switch>
+      <Switch location={location} key={location.pathname}>
         <Route path="/auth" component={Auth} />
         <Redirect to="/auth"/>
       </Switch>
     );
 
+
     if (this.props.isAuthenticated) {
       routes = (
-        <Switch>
+        <Switch location={location} key={location.pathname}>
           <Route path="/" exact component={Central} />
           <Route path="/dataLoader" component={CentralDataLoader} />
           <Route path="/logout" component={Logout} />
@@ -36,7 +37,7 @@ class App extends Component {
     return (
       <Layout>
         <div className="App">
-          {routes}
+            {routes}
         </div>
       </Layout>
     );
