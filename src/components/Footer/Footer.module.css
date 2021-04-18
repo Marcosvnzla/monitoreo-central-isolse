@@ -1,0 +1,37 @@
+.footer {
+  position: absolute;
+  bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 8px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: 'Lato';
+  text-align: center;
+}
+
+.footer p {
+  margin: 8px 0;
+}
+
+.footer img {
+  width: 58px;
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+  .footer img {
+    display: none;
+  } 
+
+  .footer p {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .footer {
+    width: 15%;
+  }
+} 

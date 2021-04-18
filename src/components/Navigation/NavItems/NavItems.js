@@ -1,6 +1,7 @@
 import React from 'react';
 import NavItem from './NavItem/NavItem';
 import CentralesMenu from '../../CentralesMenu/CentralesMenu';
+import Footer from '../../Footer/Footer';
 import styles from './NavItems.module.css';
 
 const navItems = (props) => {
@@ -10,6 +11,7 @@ const navItems = (props) => {
       <CentralesMenu />
       <NavItem clicked={props.clicked} link="/dataLoader">Cargar Datos</NavItem>
       <NavItem clicked={props.clicked} link="/logout">Salir</NavItem>
+      <Footer/>
     </ul>
   );
 }

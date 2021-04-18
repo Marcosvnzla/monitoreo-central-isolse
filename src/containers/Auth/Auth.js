@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { motion } from 'framer-motion';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import styles from './Auth.module.css';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import ImageContainer from '../../components/ImageContainer/ImageContainer';
 import logo from '../../assets/images/bigLogo_img.png';
-import Spinner from '../../components/UI/Spinner/Spinner';
 import lineBreaker from '../../assets/images/line_breaker.png';
+import teslabLogoImg from '../../assets/images/teslab_logo.svg';
+import Footer from '../../components/Footer/Footer';
 import * as actions from '../../store/actions/index';
 
 const formSchema = Yup.object().shape({
@@ -86,12 +87,7 @@ class Auth extends Component {
     }
 
     return (
-      <motion.div 
-        className={styles.Auth}
-        initial={{opacity: 1}}
-        animate={{opacity: 1}}
-        exit={{opacity: 0}}
-      >
+      <div className={styles.Auth}>
         <Formik 
                 validationSchema={formSchema}
                 onSubmit={values => this.login(values)}
@@ -107,10 +103,15 @@ class Auth extends Component {
           <ImageContainer imageImport={lineBreaker} moreStyles={{height: '400px'}}/>
         </div>
         <div className={styles.extraInfo}>
-          <h1>Extra</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eleifend non libero non cursus. Vivamus eu lectus interdum, maximus eros a, tincidunt elit. Etiam turpis magna, mollis sit amet tortor ut, ultricies ornare magna.</p>
+          <h1>Bienvenido</h1>
+          <p>al sistema de monitoreo remoto de centrales de alarma de incendio Simplex <br/><strong style={{color: "#CA6109"}}>[Versión Beta]</strong>.</p>
+          <p>Este sistema tiene la finalidad de permitirle monitorear el detalle de lo que ocurre en su instalación.</p>
+          <p>Por favor, ingrese las credenciales de configuración del equipo.</p>
+          <p>Cualquier duda o consulta por favor comunicate con nosotros a:</p>
+          <p> <a style={{color: "#3B3B3A", fontWeight: "bold"}} href="mailto: monitoreoisolse@gmail.com">monitoreoisolse@gmail.com</a></p>
         </div>
-      </motion.div>
+        <Footer style={{bottom: "110px", width: "220px"}} />
+      </div>
     );
   }
 }

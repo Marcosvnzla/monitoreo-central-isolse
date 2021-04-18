@@ -6,11 +6,12 @@
   left: 0;
   background-color: #eeeeee;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 @media (max-width: 480px) {
   .messageLogger {
     width: 100%;
-    min-height: 300px;
+    overflow: unset;
   }
 }
