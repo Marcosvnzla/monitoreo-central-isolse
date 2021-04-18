@@ -30,8 +30,12 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width: 900px) and (orientation: landscape) {
   .footer {
-    width: 15%;
+    font-size: 12px;
   }
-} 
+
+  .footer img {
+    width: 32px;
+  }
+}

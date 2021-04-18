@@ -1,17 +1,15 @@
 .messageLogger {
-  height: 100%;
+  height: 100vh;
   width: 35%;
   padding: 20px;
-  top: 0;
-  left: 0;
   background-color: #eeeeee;
-  overflow: scroll;
   overflow-x: hidden;
 }
 
 @media (max-width: 480px) {
   .messageLogger {
     width: 100%;
+    height: unset;
     overflow: unset;
   }
 }

@@ -10,7 +10,6 @@ import ImageContainer from '../../components/ImageContainer/ImageContainer';
 import logo from '../../assets/images/bigLogo_img.png';
 import lineBreaker from '../../assets/images/line_breaker.png';
 import teslabLogoImg from '../../assets/images/teslab_logo.svg';
-import Footer from '../../components/Footer/Footer';
 import * as actions from '../../store/actions/index';
 
 const formSchema = Yup.object().shape({
@@ -110,7 +109,10 @@ class Auth extends Component {
           <p>Cualquier duda o consulta por favor comunicate con nosotros a:</p>
           <p> <a style={{color: "#3B3B3A", fontWeight: "bold"}} href="mailto: monitoreoisolse@gmail.com">monitoreoisolse@gmail.com</a></p>
         </div>
-        <Footer style={{bottom: "110px", width: "220px"}} />
+        <div className={styles.footer}>
+          <img src={teslabLogoImg}/>
+          <p>Powered by Teslab</p>
+        </div>
       </div>
     );
   }

@@ -1,14 +1,13 @@
 .Auth {
+  position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
   background: linear-gradient(#3A3A3A, #CA6109);
   width: 90%;
   max-width: 1024px;
-  height: 80vh;
-  margin: 0 auto;
-  margin-top: 10vh;
-  padding: 16px;
+  margin: 10vh auto;
+  padding: 10vh 16px;
   font-family: 'lato';
   border-radius: 15px;
 }
@@ -33,6 +32,29 @@
 
 .extraInfo p {
   font-size: 16px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 0 8px;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: 'Lato';
+  text-align: center;
+  font-size: 12px;
+}
+
+.footer p {
+  margin: 8px 0;
+}
+
+.footer img {
+  width: 32px;
 }
 
 @media (max-width: 768px) {
