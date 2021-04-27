@@ -62,6 +62,12 @@ class Central extends Component {
   createMessageForDisplay = (messageIndex) => {
     const device = this.state.abnormalDevices[messageIndex];
 
+    if (!this.props.currentCentral) {
+      return (
+        <p style={{fontSize: '22px', fontWeight: 'bold', fontFamily: 'Montserrat'}}>Por favor, seleccione una central</p>
+      );
+    }
+
     if (!device && (this.state.abnormalDevices.length !== 0)) {
       return (<p>Seleccione un mensaje para mostrar</p>);
     } else if (this.state.abnormalDevices.length === 0) {
@@ -71,7 +77,7 @@ class Central extends Component {
           <h2>Sistema Normal</h2>
         </div>
       );
-    }
+    } 
 
     return (
       <Message type={device.type}
@@ -178,13 +184,15 @@ const mapStateToProps = state => {
   return {
     userId: state.userId,
     token: state.token,
-    currentCentral: state.currentCentral
+    currentCentral: state.currentCentral,
+    centrales: state.centrales
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onGetCentrales: (uid, token) => dispatch(actions.getCentrales(uid, token))
+    onGetCentrales: (uid, token) => dispatch(actions.getCentrales(uid, token)),
+    onSetCurrentCentral: (central) => dispatch(actions.setCurrentCentral(central))
   }
 }
 

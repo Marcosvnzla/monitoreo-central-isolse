@@ -9,6 +9,7 @@ const loadCentrales = (centrales) => {
 }
 
 export const setCurrentCentral = (clickedCentral) => {
+  localStorage.setItem('lastSelectedCentral', clickedCentral);
   return {
     type: actionTypes.SET_CURRENT_CENTRAL,
     clickedCentral: clickedCentral
@@ -20,8 +21,12 @@ export const getCentrales = (uid, token) => {
     axios.get(`${process.env.REACT_APP_FIREBASE_URL}/${uid}.json?auth=${token}&uid=${uid}`)
     .then(response => {
       const centrales = Object.keys(response.data);
+      const lastSelectedCentral = localStorage.getItem('lastSelectedCentral');
       dispatch(loadCentrales(centrales));
-      dispatch(setCurrentCentral(centrales[0]));
+      if (!lastSelectedCentral) {
+        return;
+      }
+      dispatch(setCurrentCentral(lastSelectedCentral));
     })
     .catch(error => {
       console.log(error.response.data);
