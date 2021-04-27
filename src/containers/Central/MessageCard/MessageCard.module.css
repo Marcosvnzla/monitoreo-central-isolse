@@ -52,7 +52,14 @@
 
 .Alarma {
   color: #E7E7E7;
+}
+
+.Ack {
   animation: colorLetterChange 1s linear 1s infinite;
+}
+
+.AckFuego {
+  animation: colorLetterChangeFuego 1s linear 1s infinite;
 }
 
 .Alarma .counter {
@@ -71,10 +78,20 @@
 
 @keyframes colorLetterChange {
   from {
-    color: red;
+    color: rgba(255, 255, 255, 0);
   }
 
   to {
-    color: #E7E7E7;
+    color: #333333;
+  }
+}
+
+@keyframes colorLetterChangeFuego {
+  from {
+    color: rgba(255, 255, 255, 0);
+  }
+
+  to {
+    color: #e7e7e7;
   }
 }

@@ -39,10 +39,15 @@ class Central extends Component {
     abnormalDevices.on('value', (snapshot) => {
       const data = snapshot.val();
       const devicesArray = [];
-      for (let key in data) {
-        for (const el of data[key]) {
-          devicesArray.push(el);
+      /* 
+        for (let key in data) {
+          for (const el of data[key]) {
+            devicesArray.push(el);
+          }
         }
+      */
+      for (let key in data) {
+        devicesArray.push(data[key]);
       }
       this.setState({abnormalDevices: devicesArray});
       this.setAlarmMessageFirst(devicesArray);
@@ -121,6 +126,7 @@ class Central extends Component {
       abnormalDevicesList = this.state.abnormalDevices.map((device, index) => {
         return (
           <MessageCard type={device.type}
+                   ack={device.ack} //ack signigica si esta chequeado en la central el mensaje.
                    status={device.status}
                    position={`${index + 1} de ${this.state.abnormalDevices.length}`}
                    date={device.date}

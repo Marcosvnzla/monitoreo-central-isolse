@@ -11,6 +11,14 @@ const messageLogger = (props) => {
     classes.push(styles.Alarma);
   }
 
+  if (props.ack) {
+    classes.push(styles.Ack);
+  }
+
+  if (props.fuego === 'ALARMA' && props.ack) {
+    classes.push(styles.AckFuego);
+  }
+
   return (
     <Draggable draggableId={`draggable-${props.indexkey}`} index={props.indexkey}>
       {(provided) => {

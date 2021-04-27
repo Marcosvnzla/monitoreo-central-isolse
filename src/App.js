@@ -12,6 +12,7 @@ import * as actions from './store/actions/index';
 class App extends Component {
   componentDidMount () {
     this.props.onAuthCheckStatus();
+    this.props.onCheckSessionStatus();
   }
 
   render () {
@@ -53,7 +54,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuthCheckStatus: () => dispatch(actions.authCheckStatus())
+    onAuthCheckStatus: () => dispatch(actions.authCheckStatus()),
+    onCheckSessionStatus: () => dispatch(actions.checkSessionStatus())
   }
 }
 

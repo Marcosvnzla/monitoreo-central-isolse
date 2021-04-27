@@ -28,6 +28,7 @@ export const logout = () => {
   localStorage.removeItem('userId');
   localStorage.removeItem('expirationDate');
   localStorage.removeItem('refreshToken');
+  localStorage.removeItem('sessionDate');
   return {
     type: actionTypes.LOGOUT
   }
@@ -91,6 +92,32 @@ export const authCheckStatus = () => {
   }
 }
 
+const checkSessionTimeout = (sessionExpirationTime) => {
+  console.log(sessionExpirationTime);
+  return dispatch => {
+    setTimeout(() => {
+      console.log('session timed out');
+      dispatch(logout());
+    }, sessionExpirationTime * 1000);
+  }
+}
+
+export const checkSessionStatus = () => {
+  return dispatch => {
+    const sessionExpirationDate = new Date(localStorage.getItem('sessionDate'));
+    if (sessionExpirationDate <= new Date() || !sessionExpirationDate) {
+      console.log('session timed out');
+      dispatch(logout());
+    } else {
+      if (sessionExpirationDate > new Date()) {
+        console.log('session still active');
+        const newExpirationTime = (sessionExpirationDate.getTime() - new Date().getTime()) / 1000;
+        dispatch(checkSessionTimeout(newExpirationTime));
+      }
+    }
+  }
+}
+
 export const authInit = (email, password) => {
   return dispatch => {
     dispatch(authStart());
@@ -108,12 +135,17 @@ export const authInit = (email, password) => {
       const userId = response.data.localId;
       const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
       const refreshToken = response.data.refreshToken;
+      const sessionHourDuration = 5;
+      const sessionDate = new Date(new Date().getTime() + (sessionHourDuration * 3600 * 1000));
       localStorage.setItem('expirationDate', expirationDate);
       localStorage.setItem('token', token);
       localStorage.setItem('userId', userId);
       localStorage.setItem('refreshToken', refreshToken);
+      localStorage.setItem('sessionDate', sessionDate); 
       dispatch(authSuccess(token, userId, refreshToken));
       dispatch(checkAuthTimeout(response.data.expiresIn, refreshToken));
+      dispatch(checkSessionTimeout(sessionDate.getTime() / 1000));
+      console.log('session started');
     })
     .catch(e => {
       console.log(`Error message: ${e.response.data.error.message}`);
