@@ -24,7 +24,13 @@ class Central extends Component {
   }
 
   componentDidMount () {
-    this.props.onGetCentrales(this.props.userId, this.props.token);
+    if (this.props.userId && this.props.token) {
+      this.props.onGetCentrales(this.props.userId, this.props.token);
+    } else {
+      setTimeout(() => {
+        this.props.onGetCentrales(this.props.userId, this.props.token);
+      }, 1000);
+    }
     this.setFirebaseReference();
   }
 
