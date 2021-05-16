@@ -28,11 +28,9 @@ class Notifications extends Component {
         const abnormalDevices = firebase.database().ref(`${this.props.userId}/${key}/Abnormal_Devices`);
         abnormalDevices.on('value', (snapshot) => {
           const data = snapshot.val();
-          console.log(data);
           const abnormal = {...this.state.abnormalDevices};
           abnormal[key] = data;
           this.setState({abnormalDevices: abnormal});
-          console.log(this.state.abnormalDevices);
           if (data) {
             this.notificationsAlert(key);
           }
@@ -60,16 +58,26 @@ class Notifications extends Component {
       classes.push(styles.show);
     }
 
+    let abDevicesList = [];
+    const devicesArray = [];
+    for (let key in this.state.abnormalDevices) {
+      for (let el in this.state.abnormalDevices[key]) {
+        devicesArray.push({...this.state.abnormalDevices[key][el], from: key});
+      }
+    }
+    abDevicesList = devicesArray.map((device, index) => {
+      return (
+        <li key={new Date() + index}>{`El dispositivo ${device.id} de ${device.from} esta en ${device.status}`}</li>
+      );
+    });
+
     return (
       <Fragment>
         <Backdrop show={this.state.showNotifications} invisible clicked={this.showNotifications} />
         <li className={styles.NavigationItem} onClick={this.showNotifications}>
           <div>Notificaciones</div>
           <ul className={classes.join(' ')}>
-            <li>Nofif1</li>
-            <li>Nofif1</li>
-            <li>Nofif1</li>
-            <li>Nofif1</li>
+            {this.state.abnormalDevices ? abDevicesList : 'Cargando notificaciones...'}
           </ul>
         </li>
       </Fragment>
