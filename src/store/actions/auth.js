@@ -144,7 +144,7 @@ export const authInit = (email, password) => {
       localStorage.setItem('sessionDate', sessionDate); 
       dispatch(authSuccess(token, userId, refreshToken));
       dispatch(checkAuthTimeout(response.data.expiresIn, refreshToken));
-      dispatch(checkSessionTimeout(sessionDate.getTime() / 1000));
+      dispatch(checkSessionStatus());
       console.log('session started');
     })
     .catch(e => {

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect, shallowEqual } from 'react-redux';
+import NotifMessage from './NotifMessage/NotifMessage';
 import firebase from '../../Firebase';
 import Backdrop from '../../components/UI/Backdrop/Backdrop';
 import styles from './Notifications.module.css';
@@ -67,17 +68,17 @@ class Notifications extends Component {
     }
     abDevicesList = devicesArray.map((device, index) => {
       return (
-        <li key={new Date() + index}>{`El dispositivo ${device.id} de ${device.from} esta en ${device.status}`}</li>
+        <NotifMessage key={new Date() + index} central={device.from} status={device.status} id={device.id} />
       );
     });
 
     return (
       <Fragment>
-        <Backdrop show={this.state.showNotifications} invisible clicked={this.showNotifications} />
+        <Backdrop show={this.state.showNotifications} clicked={this.showNotifications} />
         <li className={styles.NavigationItem} onClick={this.showNotifications}>
-          <div>Notificaciones</div>
+          <div className={styles.title}>Notificaciones</div>
           <ul className={classes.join(' ')}>
-            {this.state.abnormalDevices ? abDevicesList : 'Cargando notificaciones...'}
+            {this.state.abnormalDevices ? abDevicesList : 'No se han podido cargar las notificaciones, por favor refresque la página'}
           </ul>
         </li>
       </Fragment>
