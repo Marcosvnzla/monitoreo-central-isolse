@@ -78,7 +78,7 @@ class Notifications extends Component {
         <li className={styles.NavigationItem} onClick={this.showNotifications}>
           <div className={styles.title}>Notificaciones</div>
           <ul className={classes.join(' ')}>
-            {this.state.abnormalDevices ? abDevicesList : 'No se han podido cargar las notificaciones, por favor refresque la página'}
+            {this.state.abnormalDevices ? abDevicesList : <h1 style={{fontFamily: 'Montserrat', color: '#8BDC6E'}}>Sin notificaciones</h1>}
           </ul>
         </li>
       </Fragment>

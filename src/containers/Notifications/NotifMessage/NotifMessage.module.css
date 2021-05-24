@@ -1,6 +1,6 @@
 .NotifMessage {
   position: relative;
-  width: 90%;
+  width: 80%;
   padding: 8px;
   margin: 16px auto;
   font-family: 'Lato';
@@ -10,22 +10,42 @@
   text-align: center;
 }
 
-.logo {
+.from {
   position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   top: 4px;
   left: 4px;
   margin: 0;
-  padding: 0;
+  padding: 8px;
 }
 
-.logo h2 {
+.from h2 {
   margin: 0;
+  margin-left: 12px;
   padding: 0;
-  font-size: 12px;
+  font-size: 16px;
   font-family: 'Montserrat';
-  font-weight: 200;
+  font-weight: bold;
 }
 
 .title {
   font-weight: 300;
+}
+
+.logo {
+  width: 28px;
+  height: 28px;
+}
+
+@media (max-width: 480px) {
+  .from h2 {
+    font-size: 12px;
+  }
+
+  .title {
+    margin-top: 32px;
+    font-size: 16px;
+  }
 }
