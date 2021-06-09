@@ -10,8 +10,9 @@ const navItems = (props) => {
     <ul className={styles.NavItems} style={props.moreStyles}>
       <NavItem clicked={props.clicked} link="/">Central</NavItem>
       <CentralesMenu />
-      <NavItem clicked={props.clicked} link="/dataLoader">Cargar Datos</NavItem>
+      {/*<NavItem clicked={props.clicked} link="/dataLoader">Cargar Datos</NavItem> No incluido en el lanzamiento de Junio de 2021*/}
       <Notifications />
+      <NavItem clicked={props.clicked} link="/location">Posición</NavItem>
       <NavItem clicked={props.clicked} link="/logout">Salir</NavItem>
       <Footer/>
     </ul>

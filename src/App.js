@@ -6,6 +6,7 @@ import Layout from './components/Layout/Layout';
 import Auth from './containers/Auth/Auth';
 import Central from './containers/Central/Central';
 import CentralDataLoader from './containers/CentralDataLoader/CentralDataLoader';
+import Location from './containers/Location/Location';
 import Logout from './containers/Auth/Logout/Logout';
 import * as actions from './store/actions/index';
 
@@ -29,7 +30,8 @@ class App extends Component {
       routes = (
         <Switch>
           <Route path="/" exact component={Central} />
-          <Route path="/dataLoader" component={CentralDataLoader} />
+          {/*<Route path="/dataLoader" component={CentralDataLoader} /> no incluida en el lanzamiento de Junio 2021*/}
+          <Route path="/location" component={Location} />
           <Route path="/logout" component={Logout} />
           <Redirect to="/"/>
         </Switch>

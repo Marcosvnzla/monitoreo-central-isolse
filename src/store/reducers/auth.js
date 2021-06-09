@@ -9,7 +9,8 @@ const initialState = {
   errorMessage: '',
   centrales: null,
   currentCentral: '',
-  popUpMessages: []
+  popUpMessages: [],
+  locations: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -74,6 +75,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         popUpMessages: []
+      }
+    
+    case actionTypes.SET_LOCATIONS:
+      return {
+        ...state,
+        locations: action.addresses
       }
 
     default:

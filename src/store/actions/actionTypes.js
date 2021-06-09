@@ -15,3 +15,5 @@ export const SET_CURRENT_CENTRAL = 'SET_CURRENT_CENTRAL';
 
 export const POPUP_START = 'POPUP_START';
 export const POPUP_END = 'POPUP_END';
+
+export const SET_LOCATIONS = 'SET_LOCATIONS';
