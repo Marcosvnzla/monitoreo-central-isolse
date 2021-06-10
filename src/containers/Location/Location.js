@@ -39,11 +39,27 @@ class Location extends Component {
       .then(response => {
         console.log(response.data.results[0].geometry.location);
         const coordinates = response.data.results[0].geometry.location;
-          new google.maps.Marker({
-            position: coordinates,
-            map: map,
-            title: "Daniel es bien marico"
-          });
+        const marker = new google.maps.Marker({
+          position: coordinates,
+          map: map,
+          title: `Marcador de Central ${this.props.centrales[this.props.locations.indexOf(i)]}`
+        });
+
+        const infoWindow = new google.maps.InfoWindow({
+          content: `<h2>${this.props.centrales[this.props.locations.indexOf(i)]}</h2><p>${i}</p>`
+        });
+        console.log(this.props.centrales[this.props.locations.indexOf(i)]);
+        infoWindow.open(map, marker);
+        let isOpen = true;
+        marker.addListener("click", () => {
+          if (isOpen) {
+            infoWindow.close();
+            isOpen = false;
+          } else {
+            infoWindow.open(map, marker);
+            isOpen = true;
+          }
+        });
       })
       .catch(error => {
         console.log(error.response.data)
@@ -52,7 +68,7 @@ class Location extends Component {
   }
 
   render () {
-    if (this.props.locations.length !== 0) {
+    if (this.props.locations.length !== 0 && this.props.centrales) {
       this.renderMap();
     }
 
@@ -66,7 +82,8 @@ const mapStateToProps = state => {
   return {
     userId: state.userId,
     token: state.token,
-    locations: state.locations
+    locations: state.locations,
+    centrales: state.centrales
   }
 }
 

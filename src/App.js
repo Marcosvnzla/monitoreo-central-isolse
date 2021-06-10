@@ -5,7 +5,7 @@ import './App.css';
 import Layout from './components/Layout/Layout';
 import Auth from './containers/Auth/Auth';
 import Central from './containers/Central/Central';
-import CentralDataLoader from './containers/CentralDataLoader/CentralDataLoader';
+//import CentralDataLoader from './containers/CentralDataLoader/CentralDataLoader';
 import Location from './containers/Location/Location';
 import Logout from './containers/Auth/Logout/Logout';
 import * as actions from './store/actions/index';
@@ -18,6 +18,8 @@ class App extends Component {
 
   render () {
     //non authorized routes
+    this.props.onAuthCheckStatus();
+    this.props.onCheckSessionStatus();
     let routes = (
       <Switch>
         <Route path="/auth" component={Auth} />

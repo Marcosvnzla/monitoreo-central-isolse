@@ -12,7 +12,7 @@ const navItems = (props) => {
       <CentralesMenu />
       {/*<NavItem clicked={props.clicked} link="/dataLoader">Cargar Datos</NavItem> No incluido en el lanzamiento de Junio de 2021*/}
       <Notifications />
-      <NavItem clicked={props.clicked} link="/location">Posición</NavItem>
+      <NavItem clicked={props.clicked} link="/location">Ubicación</NavItem>
       <NavItem clicked={props.clicked} link="/logout">Salir</NavItem>
       <Footer/>
     </ul>

@@ -10,6 +10,7 @@ import MessageCard from './MessageCard/MessageCard';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import bigLogoImg from '../../assets/images/bigLogo_img.png';
 import noEventsImg from '../../assets/images/no_events_bg_img.svg';
+import comFailImg from '../../assets/images/com_fail_img.svg'
 import ventilacionImg from '../../assets/images/ventilacion_central.svg';
 import lockImg from '../../assets/images/central_lock.svg';
 import boltImg from '../../assets/images/central_bolt.svg';
@@ -20,7 +21,9 @@ class Central extends Component {
     deviceInfo: '',
     abnormalDevices: null,
     messageIndex: 0,
-    popUpMessages: []
+    popUpMessages: [],
+    caiConnection: 1,
+    maxErrors: 0
   }
 
   componentDidMount () {
@@ -36,6 +39,8 @@ class Central extends Component {
 
   setFirebaseReference = () => {
     const abnormalDevices = firebase.database().ref(`${this.props.userId}/${this.props.currentCentral}/Abnormal_Devices`);
+    const caiConnection = firebase.database().ref(`${this.props.userId}/${this.props.currentCentral}/CAI_Connection`);
+    const maxErrors = firebase.database().ref(`${this.props.userId}/${this.props.currentCentral}/Max_Errors`);
     abnormalDevices.on('value', (snapshot) => {
       const data = snapshot.val();
       const devicesArray = [];
@@ -51,6 +56,14 @@ class Central extends Component {
       }
       this.setState({abnormalDevices: devicesArray});
       this.setAlarmMessageFirst(devicesArray);
+    }, error => {console.log(error)});
+    caiConnection.on('value', (snapshot) => {
+      const data = snapshot.val();
+      this.setState({caiConnection: data});
+    }, error => {console.log(error)});
+    maxErrors.on('value', (snapshot) => {
+      const data = snapshot.val();
+      this.setState({maxErrors: data});
     }, error => {console.log(error)});
   }
 
@@ -77,8 +90,14 @@ class Central extends Component {
           <h2>Sistema Normal</h2>
         </div>
       );
-    } 
-
+    } else if (this.state.caiConnection === 1) {
+      return (
+        <div className={styles.noEvents} style={{backgroundImage: `url(${comFailImg})`}}>
+          <img src={bigLogoImg} />
+          <h2>Sistema Normal</h2>
+        </div>
+      );
+    }
     return (
       <Message type={device.type}
                 status={device.status}
