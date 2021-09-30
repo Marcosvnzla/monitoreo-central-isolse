@@ -1,3 +1,9 @@
+/* 
+Single Page App designed (using Figma) as a web interface for fire monitoring systems.
+It gets the data from a firebase database with all the information of the fire alarm system which uploads the information using a Raspberry Pi
+All images designed with Figma
+*/
+
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -26,7 +32,6 @@ class App extends Component {
         <Redirect to="/auth"/>
       </Switch>
     );
-
 
     if (this.props.isAuthenticated) {
       routes = (

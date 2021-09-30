@@ -10,7 +10,7 @@ import MessageCard from './MessageCard/MessageCard';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import bigLogoImg from '../../assets/images/bigLogo_img.png';
 import noEventsImg from '../../assets/images/no_events_bg_img.svg';
-import comFailImg from '../../assets/images/com_fail_img.svg'
+import comFailImg from '../../assets/images/white_bg.svg'
 import ventilacionImg from '../../assets/images/ventilacion_central.svg';
 import lockImg from '../../assets/images/central_lock.svg';
 import boltImg from '../../assets/images/central_bolt.svg';
@@ -83,16 +83,23 @@ class Central extends Component {
 
     if (!device && (this.state.abnormalDevices.length !== 0)) {
       return (<p>Seleccione un mensaje para mostrar</p>);
+    } else if (this.state.caiConnection === 0) {
+      return (
+        <div className={styles.noEvents} style={{backgroundImage: `url(${comFailImg})`}}>
+          <img src={bigLogoImg} />
+          <h2 style={{color: '#BF2222'}}>Falla de comunicación con la Central de Alarma de Incendio</h2>
+        </div>
+      );
+    } else if (this.state.maxErrors === 1) {
+      return (
+        <div className={styles.noEvents} style={{backgroundImage: `url(${comFailImg})`}}>
+          <img src={bigLogoImg} />
+          <h2 style={{color: '#BF2222'}}>Se ha alcanzado el límite eventos, es posible que existan eventos por reportar</h2>
+        </div>
+      );
     } else if (this.state.abnormalDevices.length === 0) {
       return (
         <div className={styles.noEvents} style={{backgroundImage: `url(${noEventsImg})`}}>
-          <img src={bigLogoImg} />
-          <h2>Sistema Normal</h2>
-        </div>
-      );
-    } else if (this.state.caiConnection === 1) {
-      return (
-        <div className={styles.noEvents} style={{backgroundImage: `url(${comFailImg})`}}>
           <img src={bigLogoImg} />
           <h2>Sistema Normal</h2>
         </div>
