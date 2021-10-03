@@ -10,6 +10,9 @@ After loggin in, the user can see the information provided by the fire alarm dev
 **Note: this web interface tries by NO means to replace the actual fire alarm system device!**
 
 ## Screenshots
+
+### Usage Demo
 ![Use screen](/src/assets/readmeImages/Use_Animation.gif)
 
+### Responsive Design
 ![Responsive screen](/src/assets/readmeImages/Responsive_Animation.gif)
