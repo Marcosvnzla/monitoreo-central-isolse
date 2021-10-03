@@ -8,3 +8,8 @@ An IoT device reads the data provided by the fire alarm device. This data is the
 After loggin in, the user can see the information provided by the fire alarm device and its changes in realtime.
 
 **Note: this web interface tries by NO means to replace the actual fire alarm system device!**
+
+## Screenshots
+![Use screen](/src/readmeImages/Use_Animation.gif)
+
+![Responsive screen](/src/readmeImages/Responsive_Animation.gif)
